@@ -1,0 +1,163 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body{
+  background:#1e293b;
+  color:#ffffff;
+}
+
+.wrapper{
+  width:96%;
+  margin:20px auto;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 20px;
+}
+
+.header-section{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  flex:1;
+}
+
+.header-section.center{
+  justify-content:center;
+  font-size:26px;
+  font-weight:700;
+}
+
+.header-section.right{
+  justify-content:flex-end;
+  font-size:18px;
+}
+
+.header-line{
+  height:2px;
+  background:#475569;
+  flex:1;
+}
+
+/* LOGO */
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-icon{
+  font-size:30px;
+}
+
+.logo-text .title{
+  font-size:20px;
+  font-weight:700;
+}
+
+.logo-text .sub{
+  font-size:13px;
+  color:#f59e0b;
+}
+
+/* CARD */
+.card{
+  background:#334155;
+  border-radius:12px;
+  margin-top:20px;
+  padding:18px;
+}
+
+.card-top{
+  display:flex;
+  justify-content:space-between;
+  font-size:15px;
+}
+
+.divider{
+  height:1px;
+  background:#475569;
+  margin:14px 0;
+}
+
+/* INFO GRID */
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+}
+
+.info-item{
+  padding:10px 15px;
+  border-right:1px solid #475569;
+}
+
+.info-item:last-child{
+  border-right:none;
+}
+
+.info-item label{
+  font-size:13px;
+  color:#cbd5f5;
+}
+
+.info-item span{
+  font-size:15px;
+  font-weight:600;
+}
+
+/* TABLE */
+.table-card{
+  background:#334155;
+  border-radius:12px;
+  margin-top:25px;
+  overflow:hidden;
+}
+
+.table-title{
+  padding:14px 18px;
+  font-size:20px;
+  font-weight:700;
+  border-bottom:1px solid #475569;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  text-align:center;
+}
+
+th{
+  background:#3b4a63;
+  padding:12px;
+  border-bottom:1px solid #475569;
+}
+
+td{
+  padding:12px;
+  border-bottom:1px solid #475569;
+}
+
+th:first-child,
+td:first-child{
+  text-align:left;
+  padding-left:18px;
+  font-weight:600;
+}
+
+.danger{
+  color:#fcfcfc;
+  font-weight:700;
+}
+
+.gap-row td{
+  border:none;
+  height:12px;
+}
