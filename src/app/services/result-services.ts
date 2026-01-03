@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ResultResponse } from '../model/result.model';
 import { Observable } from 'rxjs';
 
 
@@ -14,10 +15,10 @@ export class ResultServices {
   }
 
 
-  getResults() {
+  getResults() : Observable<ResultResponse[]> {
 
     const api = 'http://localhost:3002/planning/spectrum/from-furnace';
-    return this.http.get(api);
+    return this.http.get<ResultResponse[]>(api);
   }
   
 }

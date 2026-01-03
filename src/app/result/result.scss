@@ -5,10 +5,10 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-body{
-  background:#1e293b;
-  color:#ffffff;
+body {
+  background: #1D2637;
 }
+
 
 .wrapper{
   width:96%;
@@ -28,6 +28,14 @@ body{
   align-items:center;
   gap:15px;
   flex:1;
+}
+
+.header-section.center{
+  color: white;
+}
+
+.header-section.right{
+  color: white;
 }
 
 .header-section.center{
@@ -61,6 +69,7 @@ body{
 .logo-text .title{
   font-size:20px;
   font-weight:700;
+  color: #ffffff;
 }
 
 .logo-text .sub{
@@ -68,7 +77,6 @@ body{
   color:#f59e0b;
 }
 
-/* CARD */
 .card{
   background:#334155;
   border-radius:12px;
@@ -79,7 +87,8 @@ body{
 .card-top{
   display:flex;
   justify-content:space-between;
-  font-size:15px;
+  font-size:20px;
+  color: #fcfcfc;
 }
 
 .divider{
@@ -88,10 +97,39 @@ body{
   margin:14px 0;
 }
 
+// .section-start td,
+// .section-start  tr td {
+//   background: #3B4963;
+// }
+/* ===== BOTTOM ELEMENT SECTION BOX ===== */
+
+.element-row {
+  background: #3b4a63;
+  font-weight: 700;
+}
+
+/* top border to separate sections */
+.section-start td {
+  border-top: 3px solid #94a3b8;
+}
+
+/* give boxed feel to bottom section */
+.section-start td,
+.section-start ~ tr td {
+  background: #2f3e56;
+}
+
+/* stop box after 4 rows */
+.section-start ~ tr:nth-child(4) td {
+  border-bottom: 2px solid #94a3b8;
+}
+
+
 /* INFO GRID */
 .info-grid{
   display:grid;
   grid-template-columns:repeat(5,1fr);
+  color: #fcfcfc;
 }
 
 .info-item{
@@ -104,12 +142,12 @@ body{
 }
 
 .info-item label{
-  font-size:13px;
+  font-size:20px;
   color:#cbd5f5;
 }
 
 .info-item span{
-  font-size:15px;
+  font-size:18px;
   font-weight:600;
 }
 
@@ -119,6 +157,20 @@ body{
   border-radius:12px;
   margin-top:25px;
   overflow:hidden;
+  color: #ffffff;
+}
+.table-card {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 300px); /* adjust if needed */
+}
+
+table {
+  flex: 1;
+}
+
+tbody {
+  height: 100%;
 }
 
 .table-title{
@@ -126,6 +178,7 @@ body{
   font-size:20px;
   font-weight:700;
   border-bottom:1px solid #475569;
+  color: #fcfcfc;
 }
 
 table{
@@ -143,6 +196,7 @@ th{
 td{
   padding:12px;
   border-bottom:1px solid #475569;
+   font-size:18px;
 }
 
 th:first-child,
@@ -150,6 +204,7 @@ td:first-child{
   text-align:left;
   padding-left:18px;
   font-weight:600;
+  font-size:20px;
 }
 
 .danger{
