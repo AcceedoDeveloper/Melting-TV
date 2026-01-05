@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultServices} from '../services/result-services';
-import { ResultResponse } from '../model/result.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-result',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './result.html',
   styleUrl: './result.scss',
 })
-export class Result  implements OnInit {
+export class Result implements OnInit {
 
-  result : ResultResponse[] = [] ;
-
-  constructor(private resultServices: ResultServices) {
-  }
+  rawData: any[] = [];
+  
+  constructor(private resultServices: ResultServices) {}
 
   ngOnInit(): void {
-    this.resultServices.getResults().subscribe((data : ResultResponse[]) => {
+    this.resultServices.getResults().subscribe((data: any[]) => {
+      this.rawData = data;
+      console.log('Raw Data', this.rawData);
 
-      this.result = data;
-      console.log( 'data', data);
-    })
+     
+    });
   }
-
 }
+

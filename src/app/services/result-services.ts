@@ -17,7 +17,7 @@ export class ResultServices {
 
   getResults() : Observable<ResultResponse[]> {
 
-    const api = 'http://localhost:3002/planning/spectrum/from-furnace';
+    const api = 'http://localhost:3003/planning/spectrum/from-furnace';
     return this.http.get<ResultResponse[]>(api);
   }
   

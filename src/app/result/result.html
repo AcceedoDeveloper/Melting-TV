@@ -14,49 +14,64 @@
       <div class="header-line"></div>
     </div>
 
-    <div class="header-section center">
-      FURNACE-1
-    </div>
+   <div class="header-section center">
+  FURNACE-{{ rawData[0]?.spectrumResults[0]?.furnaceNo }}
+</div>
 
-    <div class="header-section right">
-      <div class="header-line"></div>
-      Heat No : <b>150796</b>
-    </div>
+<div class="header-section right">
+  <div class="header-line"></div>
+  Heat No :
+  <b>{{ rawData[0]?.spectrumResults[0]?.heatNo }}</b>
+</div>
+
 
   </div>
 
   <!-- INFO CARD -->
   <div class="card">
 
-    <div class="card-top">
-      <div>Result received at : <b>Nov 11, 2025 04:15 PM</b></div>
-      <div>Method : <b>Fe-22+N</b></div>
-    </div>
+<div class="card-top">
+  <div>
+    Result received at :
+    <b>{{ rawData[0]?.spectrumResults[0]?.createdAt | date:'MMM dd, yyyy hh:mm a' }}</b>
+  </div>
+  <div>
+    Method :
+    <b>{{ rawData[0]?.spectrumResults[0]?.Grade }}</b>
+  </div>
+</div>
+
 
     <div class="divider"></div>
+<div class="info-grid">
 
-    <div class="info-grid">
-      <div class="info-item">
-        <label>Customer Name</label><br>
-        <span>Acceedo</span>
-      </div>
-      <div class="info-item">
-        <label>Part Name</label><br>
-        <span>Filter head</span>
-      </div>
-      <div class="info-item">
-        <label>Stage</label><br>
-        <span>Initial 1</span>
-      </div>
-      <div class="info-item">
-        <label>Checked By</label><br>
-        <span>Muthukumar</span>
-      </div>
-      <div class="info-item">
-        <label>Grade</label><br>
-        <span>VS2-1-3-8</span>
-      </div>
-    </div>
+  <div class="info-item">
+    <label>Customer Name</label><br>
+    <span>{{ rawData[0]?.customerName }}</span>
+  </div>
+
+  <div class="info-item">
+    <label>Part Name</label><br>
+    <span>{{ rawData[0]?.productName }}</span>
+  </div>
+
+  <div class="info-item">
+    <label>Stage</label><br>
+    <span>{{ rawData[0]?.spectrumResults[0]?.stage }}</span>
+  </div>
+
+  <div class="info-item">
+    <label>Checked By</label><br>
+    <span>{{ rawData[0]?.spectrumResults[0]?.testedBy }}</span>
+  </div>
+
+  <div class="info-item">
+    <label>Grade</label><br>
+    <span>{{ rawData[0]?.spectrumResults[0]?.Grade }}</span>
+  </div>
+
+</div>
+
 
   </div>
 
@@ -69,39 +84,36 @@
       <thead>
         <tr>
           <th>Element</th>
-          <th>Mo</th>
-          <th>P</th>
-          <th>Sn</th>
-          <th>Cr</th>
-          <th>Si</th>
-          <th>Mn</th>
-          <th>S</th>
+         <th *ngFor="let el of rawData[0]?.spectrumResults[0]?.result">
+      {{ el.abbr }}
+    </th>
         </tr>
       </thead>
 
       <tbody>
         <tr>
           <td>Result %</td>
-          <td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td>
-        </tr>
+ <td *ngFor="let el of rawData[0]?.spectrumResults[0]?.result">
+    {{ el.labResult }}
+  </td>        </tr>
         <tr>
           <td>Required</td>
-          <td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td>
-        </tr>
+ <td *ngFor="let el of rawData[0]?.spectrumResults[0]?.result">
+    {{ el.weightToBeAdded }} Kg
+  </td>        </tr>
         <tr>
           <td>Actual Kg</td>
-          <td class="danger">56 Kg</td>
-          <td class="danger">56 Kg</td>
-          <td class="danger">56 Kg</td>
-          <td class="danger">56 Kg</td>
-          <td class="danger">56 Kg</td>
-          <td class="danger">56 Kg</td>
-          <td class="danger">56 Kg</td>
+           <td
+    *ngFor="let el of rawData[0]?.spectrumResults[0]?.result"
+    class="danger"
+  >
+    {{ el.weightToBeAdded }} Kg
+  </td>
         </tr>
 
         <!-- <tr class="gap-row"><td colspan="8"></td></tr> -->
      <!-- <tr class="element-header faded"> -->
-      <tr class="section-start element-row">
+      <!-- <tr class="section-start element-row">
         <tr>
           <th>Element</th>
           <th>Ni</th><th>-</th><th>-</th><th>-</th><th>-</th><th>-</th><th>-</th>
@@ -117,7 +129,7 @@
         <tr>
           <td>Actual Kg</td>
           <td class="danger">56 Kg</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td>
-        </tr>
+        </tr> -->
     </tbody>
     </table>
 
