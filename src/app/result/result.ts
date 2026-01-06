@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ResultServices } from '../services/result-services';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { SocketService } from '../services/socket.service';
 
 interface SpectrumElement {
   abbr?: string;
@@ -21,20 +22,37 @@ export class Result implements OnInit {
   selectedResult: any = null;
 
 
-  constructor(private resultServices: ResultServices, private cdRef: ChangeDetectorRef) {}
+  constructor(private resultServices: ResultServices, private cdRef: ChangeDetectorRef, private socketService: SocketService) {}
 
 ngOnInit(): void {
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
 
-    console.log('Raw Data:', this.rawData);
 
     this.selectedResult = this.rawData[0];
 
     this.cdRef.detectChanges();
 
-    console.log('Selected Result:', this.selectedResult);
+    console.log('get from the restAPI', this.selectedResult);
   });
+
+
+
+
+  this.socketService.on<any>('newResult').subscribe((data) => {
+    console.log('Socket data received:', data);
+     this.rawData[0] = data;
+     this.selectedResult = this.rawData[0];
+      this.cdRef.detectChanges();
+  })
+
+
+
+
+
+
+
+
 }
 
 
