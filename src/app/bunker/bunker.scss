@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: #33435b;
+  border-radius: 0;
+  padding: 12px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.header {
+  background: #2f3f58;
+  border-radius: 6px;
+  padding: 2px 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.date {
+  padding-right: 6px;
+  font-weight: bold;
+}
+
+/* BIN LIVE */
+.bin-live-wrapper {
+  margin-top: 8px;
+  background: #344a66;
+  border-radius: 6px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.bin-right {
+  height: 100%;
+  display: flex;
+}
+
+
+.bin-title {
+  color: #ff9800;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.bin-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.bin-grid img {
+  width: 100%;
+}
+
+/* TABLES */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  font-weight: bold;
+  background: #415a7a;
+  padding: 6px;
+  border: 1px solid #8a9bb5;
+}
+
+td {
+  font-weight: bold;
+  padding: 6px;
+  text-align: center;
+  border: 1px solid #8a9bb5;
+  background: #5f6c80;
+}
+
+/* BUNKER */
+.bunker-title {
+  margin-top: 8px;
+  background: #6a6a6a;
+  color: #000;
+  text-align: center;
+  font-weight: bold;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.bunker-wrapper {
+  margin-top: 6px;
+  display: grid;
+  grid-template-columns: 3fr 1.3fr;
+  gap: 8px;
+  flex: 1;
+  align-items: stretch;
+  
+}
+
+.main-table th,
+.summary-table th {
+  background: #f0c14b;
+  color: #000;
+}
+
+/* INDICATORS */
+.up {
+  color: #00ff00;
+  font-weight: bold;
+}
+
+.down {
+  color: #ff2a2a;
+  font-weight: bold;
+}
+.bin-live-section {
+  display: flex;
+  align-items: stretch;
+}
+.bin-right-table-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+
+.logo{
+  display:flex;
+  align-items:center;
+}
+
+.logo-img{
+  height:50px;     
+  width:auto;
+  object-fit:contain;
+}
+
+.bin-grid img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.bin-grid img:hover {
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 12px rgba(20, 139, 163, 0.8),
+    0 0 25px rgba(69, 186, 193, 0.5);
+}

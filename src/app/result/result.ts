@@ -29,7 +29,10 @@ ngOnInit(): void {
     this.rawData = data;
 
 
-    this.selectedResult = this.rawData[0];
+  this.selectedResult = data.find(
+      d => d.spectrumResults?.length > 0
+    );
+
 
     this.cdRef.detectChanges();
 
@@ -70,7 +73,6 @@ ngOnInit(): void {
     for (let i = 0; i < array.length; i += size) {
       const group = array.slice(i, i + size);
 
-      // 👇 fill remaining slots with placeholders
       while (group.length < size) {
         group.push({ isPlaceholder: true });
       }
