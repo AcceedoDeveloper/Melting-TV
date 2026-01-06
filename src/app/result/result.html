@@ -1,4 +1,4 @@
-<div class="wrapper" *ngIf="rawData.length > 0">
+<div class="wrapper"  *ngIf="selectedResult as result">
   <!-- HEADER -->
   <div class="header">
     <div class="header-section">
@@ -11,15 +11,16 @@
       </div>
       <div class="header-line"></div>
     </div>
+    
 
     <div class="header-section center">
-      FURNACE-{{ rawData[0]?.spectrumResults[0]?.furnaceNo }}
+      FURNACE-{{ result.spectrumResults[0]?.furnaceNo }}
     </div>
 
     <div class="header-section right">
       <div class="header-line"></div>
       Heat No :
-      <b>{{ rawData[0]?.spectrumResults[0]?.heatNo }}</b>
+      <b>{{ result.spectrumResults[0]?.heatNo }}</b>
     </div>
   </div>
 
@@ -29,13 +30,13 @@
       <div>
         Result received at :
         <b>{{
-          rawData[0]?.spectrumResults[0]?.createdAt
+          result.spectrumResults[0]?.createdAt
             | date : "MMM dd, yyyy hh:mm a"
         }}</b>
       </div>
       <div>
         Method :
-        <b>{{ rawData[0]?.spectrumResults[0]?.Grade }}</b>
+        <b>{{ result.spectrumResults[0]?.Grade }}</b>
       </div>
     </div>
 
@@ -43,27 +44,27 @@
     <div class="info-grid">
       <div class="info-item">
         <label>Customer Name</label><br />
-        <span>{{ rawData[0]?.customerName }}</span>
+        <span>{{ result.customerName }}</span>
       </div>
 
       <div class="info-item">
         <label>Part Name</label><br />
-        <span>{{ rawData[0]?.productName }}</span>
+        <span>{{ result.productName }}</span>
       </div>
 
       <div class="info-item">
         <label>Stage</label><br />
-        <span>{{ rawData[0]?.spectrumResults[0]?.stage }}</span>
+        <span>{{ result.spectrumResults[0]?.stage }}</span>
       </div>
 
       <div class="info-item">
         <label>Checked By</label><br />
-        <span>{{ rawData[0]?.spectrumResults[0]?.testedBy }}</span>
+        <span>{{ result.spectrumResults[0]?.testedBy }}</span>
       </div>
 
       <div class="info-item">
         <label>Grade</label><br />
-        <span>{{ rawData[0]?.spectrumResults[0]?.Grade }}</span>
+        <span>{{ result.spectrumResults[0]?.Grade }}</span>
       </div>
     </div>
   </div>
@@ -75,7 +76,7 @@
       <tbody>
         <ng-container
           *ngFor="
-            let group of chunkArray(rawData[0]?.spectrumResults[0]?.result, 7);
+            let group of chunkArray(result.spectrumResults[0]?.result, 7);
             let i = index
           "
         >

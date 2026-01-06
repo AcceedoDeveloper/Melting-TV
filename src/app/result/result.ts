@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResultServices } from '../services/result-services';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 interface SpectrumElement {
   abbr?: string;
@@ -17,17 +18,27 @@ interface SpectrumElement {
 })
 export class Result implements OnInit {
   rawData: any[] = [];
+  selectedResult: any = null;
 
-  constructor(private resultServices: ResultServices) {}
 
-  ngOnInit(): void {
-    this.resultServices.getResults().subscribe((data: any[]) => {
-      this.rawData = data;
-      console.log('Raw Data', this.rawData);
+  constructor(private resultServices: ResultServices, private cdRef: ChangeDetectorRef) {}
 
-      console.log('customer name', this.rawData[0].customerName);
-    });
-  }
+ngOnInit(): void {
+  this.resultServices.getResults().subscribe((data: any[]) => {
+    this.rawData = data;
+
+    console.log('Raw Data:', this.rawData);
+
+    this.selectedResult = this.rawData.find(
+      d => d.spectrumResults && d.spectrumResults.length > 0
+    );
+
+    this.cdRef.detectChanges();
+
+    console.log('Selected Result:', this.selectedResult);
+  });
+}
+
 
   
 
