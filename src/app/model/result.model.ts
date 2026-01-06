@@ -40,3 +40,12 @@ export interface ElementResult {
   weightToBeAdded: number;
   addition: boolean;
 }
+
+
+export  interface SpectrumElement {
+  alloyId: string;
+  name: string;
+  abbr: string;
+  labResult: number;
+  weightToBeAdded: number;
+}
