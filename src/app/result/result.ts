@@ -29,9 +29,7 @@ ngOnInit(): void {
 
     console.log('Raw Data:', this.rawData);
 
-    this.selectedResult = this.rawData.find(
-      d => d.spectrumResults && d.spectrumResults.length > 0
-    );
+    this.selectedResult = this.rawData[0];
 
     this.cdRef.detectChanges();
 
