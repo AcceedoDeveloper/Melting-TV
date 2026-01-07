@@ -219,3 +219,19 @@ td:first-child{
   border:none;
   height:12px;
 }
+
+/* RESULT STATUS COLORS */
+td.low {
+  color: #facc15; /* yellow */
+  font-weight: 700;
+}
+
+td.high {
+  color: #ef4444; /* red */
+  font-weight: 700;
+}
+
+td.normal {
+  color: #22c55e; /* green */
+  font-weight: 700;
+}

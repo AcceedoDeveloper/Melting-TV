@@ -95,11 +95,15 @@
 
           <!-- RESULT -->
           <tr>
-            <td>Result %</td>
-            <td *ngFor="let el of group">
-              {{ el.isPlaceholder ? "-" : el.labResult }}
-            </td>
-          </tr>
+  <td>Result %</td>
+  <td
+    *ngFor="let el of group"
+    [ngClass]="!el.isPlaceholder ? getResultClass(el) : ''"
+  >
+    {{ el.isPlaceholder ? "-" : el.labResult }}
+  </td>
+</tr>
+
 
           <!-- REQUIRED -->
           <tr>
