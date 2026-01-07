@@ -27,20 +27,15 @@ export class Result implements OnInit {
 ngOnInit(): void {
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
-
+    console.log('full data', this.rawData);
+    
 
   this.selectedResult = data.find(
       d => d.spectrumResults?.length > 0
     );
-
-
     this.cdRef.detectChanges();
-
     console.log('get from the restAPI', this.selectedResult);
   });
-
-
-
 
   this.socketService.on<any>('newResult').subscribe((data) => {
     console.log('Socket data received:', data);
@@ -48,14 +43,6 @@ ngOnInit(): void {
      this.selectedResult = this.rawData[0];
       this.cdRef.detectChanges();
   })
-
-
-
-
-
-
-
-
 }
 
 
