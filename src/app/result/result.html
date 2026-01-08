@@ -127,44 +127,60 @@
 </div>
 
 
+
+
+
+
 <div class="tv-container"  *ngIf="!selectedResult" >
 
+<div class="tv-container" *ngIf="rawData.length">
+
   <div class="header">
-    <div class="logo-box">
-      <img src="assets/logo.png" alt="Sandfits Casting Excellence">
+    <div class="logo">
+                <img style="height: 60px;" src="assets/logo.png" alt="Acceedo Logo" />
     </div>
-    <div class="title">
-      Furnace Management System
-    </div>
+    <div class="header-title">SPECTRUM LAB RESULTS</div>
   </div>
 
-  <div
-    class="furnace-card"
-    *ngFor="let furnace of rawData; let i = index"
-  >
-    <div class="furnace-title">
-      Furnace {{ i + 1 }}
-    </div>
+  <div class="card" *ngFor="let furnace of rawData; let i = index">
+    <div class="card-title">Furnace {{ i === 0 ? 'A' : 'B' }}</div>
 
     <div class="stage-row">
       <div class="stage-label">Stage</div>
 
-      <div class="stage-flow">
-        <ng-container *ngFor="let stage of furnace.stages; let last = last">
-          
-          <div class="stage" [ngClass]="[getStageClass(stage.status),  last ? 'last-stage' : '']">
-            {{ stage.name }}
-            <br>
-            <span >
-<h2  class="stage-time" >{{ stage.createdAt | date:'dd/MM/yy HH:mm' }}</h2>
-            </span>
-          </div>
+      <div class="timeline">
 
-          <div class="arrow" *ngIf="!last">➜</div>
+       <ng-container *ngFor="let stage of furnace.stages; let i = index; let last = last">
 
-        </ng-container>
+  <div class="step">
+    <div class="icon"
+         [class.green]="last"
+         [class.gray]="!last">
+           <img
+    [src]="getStageIcon(stage.status)"
+    alt="stage icon"
+  />
+    </div>
+
+    <div class="text">
+      {{ stage.name }}<br>
+<span>{{ stage.createdAt | date:'dd/MM/yy HH:mm' }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="!last"
+       class="line"
+       [class.green]="i < furnace.stages.length - 1">
+  </div>
+
+</ng-container>
+
+
       </div>
     </div>
   </div>
 
 </div>
+
+</div>
+

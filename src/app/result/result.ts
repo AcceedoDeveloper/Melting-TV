@@ -115,6 +115,20 @@ getStageClass(status: number): string {
 }
 
 
+getStageIcon(status: number): string {
+  switch (status) {
+    case 0:
+      return 'assets/schedule.png';
+    case 1:
+      return 'assets/rocket.png';
+    case 2:
+      return 'assets/mixing-bowl.png';
+    default:
+      return 'assets/spectrum.png';
+  }
+}
+
+
 
 
 }
