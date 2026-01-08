@@ -9,6 +9,7 @@ interface SpectrumElement {
   labResult?: number;
   weightToBeAdded?: number;
   isPlaceholder?: boolean;
+  qtyTaken?: number;
 }
 
 @Component({
@@ -28,6 +29,7 @@ ngOnInit(): void {
 
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
+    console.log('full data', this.rawData);
 
     this.selectedResult = data.find(
       (d: any) => d.spectrumResults?.length > 0
@@ -87,15 +89,31 @@ ngOnInit(): void {
   const upper = el.percent + el.plus;
 
   if (el.labResult < lower) {
-    return 'low';        // Yellow
+    return 'low';      
   }
 
   if (el.labResult > upper) {
-    return 'high';       // Red
+    return 'high';      
   }
 
-  return 'normal';       // Green
+  return 'normal';       
 }
+
+
+
+getStageClass(status: number): string {
+  switch (status) {
+    case 0:
+      return 'scheduled';
+    case 1:
+      return 'started';
+    case 2:
+      return 'charge';
+    default:
+      return '';
+  }
+}
+
 
 
 

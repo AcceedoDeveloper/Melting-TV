@@ -9,7 +9,7 @@ export class SocketService {
   private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3000'); 
+    this.socket = io('http://localhost:3003'); 
   }
 
   on<T>(event: string): Observable<T> {

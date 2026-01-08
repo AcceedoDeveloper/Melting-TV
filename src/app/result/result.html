@@ -76,7 +76,7 @@
       <tbody>
         <ng-container
           *ngFor="
-            let group of chunkArray(result.spectrumResults[0]?.result, 8);
+            let group of chunkArray(result.spectrumResults[0]?.result, 10);
             let i = index
           "
         >
@@ -117,11 +117,54 @@
           <tr>
             <td>Actual Kg</td>
             <td *ngFor="let el of group" class="danger">
-              {{ el.isPlaceholder ? "-" : el.weightToBeAdded + " Kg" }}
+              {{ el.isPlaceholder ? "-" : el.qtyTaken + " Kg" }}
             </td>
           </tr>
         </ng-container>
       </tbody>
     </table>
   </div>
+</div>
+
+
+<div class="tv-container"  *ngIf="!selectedResult" >
+
+  <div class="header">
+    <div class="logo-box">
+      <img src="assets/logo.png" alt="Sandfits Casting Excellence">
+    </div>
+    <div class="title">
+      Furnace Management System
+    </div>
+  </div>
+
+  <div
+    class="furnace-card"
+    *ngFor="let furnace of rawData; let i = index"
+  >
+    <div class="furnace-title">
+      Furnace {{ i + 1 }}
+    </div>
+
+    <div class="stage-row">
+      <div class="stage-label">Stage</div>
+
+      <div class="stage-flow">
+        <ng-container *ngFor="let stage of furnace.stages; let last = last">
+          
+          <div class="stage" [ngClass]="[getStageClass(stage.status),  last ? 'last-stage' : '']">
+            {{ stage.name }}
+            <br>
+            <span >
+<h2  class="stage-time" >{{ stage.createdAt | date:'dd/MM/yy HH:mm' }}</h2>
+            </span>
+          </div>
+
+          <div class="arrow" *ngIf="!last">➜</div>
+
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
 </div>
