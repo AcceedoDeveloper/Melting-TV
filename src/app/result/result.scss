@@ -83,6 +83,8 @@ html, body {
   color: #ffffff;
 }
 
+
+
 .logo-text .sub{
   font-size:13px;
   color:#f59e0b;
@@ -153,13 +155,19 @@ html, body {
 }
 
 .info-item label{
-  font-size:20px;
+  font-size:30px;
   color:#cbd5f5;
 }
 
 .info-item span{
-  font-size:18px;
+  font-size:23px;
   font-weight:600;
+}
+
+.heat-no{
+  font-size:30px;
+  font-weight:700;
+  color: #fcfcfc;
 }
 
 /* TABLE */

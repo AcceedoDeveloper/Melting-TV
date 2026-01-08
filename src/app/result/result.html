@@ -6,7 +6,7 @@
         <div class="logo-text">
           <!-- <div class="title">ACCEEDO</div>
           <div class="sub">MeltPro</div> -->
-          <img src="assets/logo.png" alt="Acceedo Logo" />
+          <img style="height: 60px;" src="assets/logo.png" alt="Acceedo Logo" />
         </div>
       </div>
       <div class="header-line"></div>
@@ -27,14 +27,14 @@
   <!-- INFO CARD -->
   <div class="card">
     <div class="card-top">
-      <div>
+      <div class="heat-no" >
         Result received at :
         <b>{{
           result.spectrumResults[0]?.createdAt
             | date : "MMM dd, yyyy hh:mm a"
         }}</b>
       </div>
-      <div>
+      <div class="heat-no">
         Method :
         <b>{{ result.spectrumResults[0]?.Grade }}</b>
       </div>
