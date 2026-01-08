@@ -117,7 +117,7 @@
           <tr>
             <td>Actual Kg</td>
             <td *ngFor="let el of group" class="danger">
-              {{ el.isPlaceholder ? "-" : el.qtyTaken + " Kg" }}
+              <span *ngIf="el.qtyTaken !== undefined"  >{{ el.isPlaceholder ? "-" : el.qtyTaken + " Kg" }}</span>
             </td>
           </tr>
         </ng-container>
