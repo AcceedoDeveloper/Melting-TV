@@ -246,8 +246,41 @@ td.normal {
 }
 
 
+.tested-ok {
+  background: linear-gradient(135deg, #2ecc71, #27ae60);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
+}
 
-.header {
+
+.not-tested {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(231, 76, 60, 0.6);
+}
+
+
+
+
+
+// stage style
+
+
+
+
+
+.dashboard-container {
+    width: 100vw;
+}
+
+
+.header2 {
   background: #2f3e52;
   border-radius: 8px;
   padding: 20px 30px;
@@ -279,104 +312,150 @@ td.normal {
   color: white;
 }
 
-/* CARD */
-.card {
-  background: #344559;
-  border-radius: 10px;
-  margin-top: 20px;
-  padding: 16px 20px 22px;
-  margin: 20px;
+.furnace-card {
+    background: #223344;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    margin: 20px;
 }
 
-.card-title {
-  background: #3f5068;
-  padding: 30px 14px;
-  border-radius: 6px;
-  font-size: 35px;
-  font-weight: 600;
-  color: #ffffff;
+.furnace-header {
+    background: #334455;
+    padding: 15px 40px;
+    font-size: 2.2rem;
+    font-weight: bold;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: #ffffff;
 }
 
-/* STAGE ROW */
-.stage-row {
-  display: flex;
-  margin-top: 20px;
-  align-items: center;
+.workflow-container {
+    display: flex;
+    align-items: center;
+    padding: 30px 40px;
 }
 
 .stage-label {
-  width: 80px;
-  color: #5bb1ff;
-  font-size: 40px;
+    color: #8eb9f0;
+    font-size: 2.5rem;
+    width: 200px;
 }
 
-/* TIMELINE */
 .timeline {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  padding: 20px;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
 }
 
+.icon-circle {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4.5rem; /* Large for 64" TV */
+    margin-bottom: 15px;
+}
+
+.icon-circle.active {
+    background-color: #00e600;
+    box-shadow: 0 0 30px rgba(0, 230, 0, 0.4);
+}
+
+.icon-circle.gray {
+    background-color: #8a99a8;
+    filter: grayscale(1); /* Makes emojis look monochromatic */
+    opacity: 0.7;
+}
+
+.step-info { text-align: center; }
+.step-name { display: block; font-size: 18px; font-weight: bold;  color: #ffffff;}
+.step-date { display: block; font-size: 18px; color: #ccc; }
+
+/* Connectors */
+.connector {
+        width: 100%;
+    flex-grow: 1;
+    height: 6px;
+    background: white;
+    margin: 0 0px;
+    position: relative;
+    top: -45px;
+    left: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.connector.active {
+              background: #00e600;
+
+
+}
+
+.connector.gray {
+          background: #556677;
+
+}
+
+.conn-emoji {
+    background: #223344;
+    border: 3px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.conn-emoji.active {
+    border-color: #00e600;
+    filter: none;
+}
+
+.icon-circle.finished {
+  background-color: #7ab57a;
+}
+
+.icon-circle.active {
+  background-color: #78bd78;
+  box-shadow: 0 0 30px rgba(0, 230, 0, 0.4);
+}
+
+.icon-circle.gray {
+  background-color: #8a99a8;
+  filter: grayscale(1);
+  opacity: 0.7;
+}
 .step {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px;
-  min-width: 120px;
+  width: 160px;
 }
 
-.icon {
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
+.step-info {
+  text-align: center;
+  min-height: 90px;        /* KEY FIX */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.timeline {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 45px;
-  margin-bottom: 8px;
+  justify-content: space-between;
 }
 
-.icon img {
-  width: 45px;
-  height: 45px;
-  object-fit: contain;
+.connector {
+  flex-grow: 1;
+  height: 6px;
+  margin: 0 10px;
+  position: relative;
+  align-self: center;      /* KEY FIX */
 }
-
-
-.icon.green {
-  background: #00d100;
-  color: #000;
-}
-
-.icon.gray {
-  background: #bdbdbd;
-  color: #333;
-}
-
-.text {
-  text-align: center;
-  font-size: 30px;
-  color: #ffffff;
-}
-
-.text span {
-  font-size: 26px;
-  color: #e0e0e0;
-}
-
-/* CONNECTING LINE */
-.line {
-  flex: 1;
-  height: 3px;
-  background: #cfcfcf;
-  margin: 0 8px;
-}
-
-.line.green {
-  background: #00d100;
-}
-
-.scheduled .icon { background: #00d100; }
-.started .icon { background: #00d100; }
-.charge .icon { background: #bdbdbd; }

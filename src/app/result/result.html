@@ -34,9 +34,21 @@
             | date : "MMM dd, yyyy hh:mm a"
         }}</b>
       </div>
+
+      
+
       <div class="heat-no">
         Method :
         <b>{{ result.spectrumResults[0]?.Grade }}</b>
+      </div>
+
+
+      <div class="right" *ngIf="status" >
+        <span class="tested-ok"> TESTED OK ✔</span>
+      </div>
+
+      <div class="right" *ngIf="!status" >
+<span class="not-tested">Failed ✖</span>
       </div>
     </div>
 
@@ -131,7 +143,7 @@
 
 
 
-<div class="tv-container"  *ngIf="!selectedResult" >
+<!-- <div class="tv-container"  *ngIf="!selectedResult" >
 
 <div class="tv-container" *ngIf="rawData.length">
 
@@ -148,39 +160,111 @@
     <div class="stage-row">
       <div class="stage-label">Stage</div>
 
-      <div class="timeline">
+      <div class="timeline-container">
+  <div class="stage-label-col">Stage</div>
 
-       <ng-container *ngFor="let stage of furnace.stages; let i = index; let last = last">
+  <ul class="timeline">
+    <li
+      class="timeline-item"
+      *ngFor="let stage of furnace.stages; let i = index; let last = last"
+      [class.active]="last"
+      [class.line-green]="last"
+      [class.icon-green]="last"
+    >
+      <div class="icon-wrapper">
+        <img
+          [src]="getStageIcon(stage.status)"
+          alt="stage icon"
+        />
+      </div>
 
-  <div class="step">
-    <div class="icon"
-         [class.green]="last"
-         [class.gray]="!last">
-           <img
-    [src]="getStageIcon(stage.status)"
-    alt="stage icon"
-  />
-    </div>
+      <div class="item-content">
+        <span class="title">{{ stage.name }}</span>
+        <span class="date">
+          {{ stage.createdAt | date:'dd/MM/yy HH:mm' }}
+        </span>
+      </div>
+    </li>
+  </ul>
+</div>
 
-    <div class="text">
-      {{ stage.name }}<br>
-<span>{{ stage.createdAt | date:'dd/MM/yy HH:mm' }}</span>
     </div>
   </div>
 
-  <div *ngIf="!last"
-       class="line"
-       [class.green]="i < furnace.stages.length - 1">
+</div>
+
+</div> -->
+
+
+
+
+<div *ngIf="!selectedResult" >
+
+
+  <div class="dashboard-container">
+        <div class="header2">
+    <div class="logo">
+                <img style="height: 60px;" src="assets/logo.png" alt="Acceedo Logo" />
+    </div>
+    <div class="header-title">Furnace Stage</div>
   </div>
 
-</ng-container>
+        <div class="furnace-card" *ngFor="let furnace of rawData; let fIndex = index">
 
+  <div class="furnace-header">
+    Furnace {{ fIndex === 0 ? 'A' : 'B' }}
+  </div>
 
+  <div class="workflow-container">
+    <div class="stage-label">Stage</div>
+
+   <div class="timeline">
+
+  <ng-container
+    *ngFor="let stage of ALL_STAGES; let i = index">
+
+    <!-- STEP -->
+    <div class="step">
+      <div class="icon-circle"
+           [class.active]="isCurrent(stage.status, getCurrentStageIndex(furnace))"
+           [class.finished]="isFinished(stage.status, getCurrentStageIndex(furnace))"
+           [class.gray]="isUpcoming(stage.status, getCurrentStageIndex(furnace))">
+        {{ getStageEmoji(stage.status) }}
+      </div>
+
+      <div class="step-info">
+        <span class="step-name">{{ stage.name }}</span>
+
+        <span class="step-date"
+              *ngIf="getStageDate(furnace, stage.status)">
+          {{ getStageDate(furnace, stage.status) | date:'dd/MM/yy HH:mm' }}
+        </span>
       </div>
     </div>
+
+    <!-- CONNECTOR -->
+    <div *ngIf="i < ALL_STAGES.length - 1"
+         class="connector"
+         [class.active]="stage.status < getCurrentStageIndex(furnace)"
+         [class.gray]="stage.status >= getCurrentStageIndex(furnace)">
+      <span class="conn-emoji"
+            [class.active]="stage.status < getCurrentStageIndex(furnace)">
+        🏃
+      </span>
+    </div>
+
+  </ng-container>
+
+</div>
+
   </div>
-
 </div>
 
-</div>
+          
 
+   
+    </div>
+
+
+
+</div>

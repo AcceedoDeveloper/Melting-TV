@@ -21,6 +21,16 @@ interface SpectrumElement {
 export class Result implements OnInit {
   rawData: any[] = [];
   selectedResult: any = null;
+  status : boolean = false;
+  count : number = 0;
+
+
+  ALL_STAGES = [
+  { status: 0, name: 'Scheduled' },
+  { status: 1, name: 'Started' },
+  { status: 2, name: 'Charge Mix' },
+  { status: 3, name: 'Spectrum Result' }
+];
 
 
   constructor(private resultServices: ResultServices, private cdRef: ChangeDetectorRef, private socketService: SocketService) {}
@@ -89,14 +99,24 @@ ngOnInit(): void {
   const upper = el.percent + el.plus;
 
   if (el.labResult < lower) {
+    this.count++;
     return 'low';      
   }
 
   if (el.labResult > upper) {
+    this.count++;
     return 'high';      
   }
 
   return 'normal';       
+}
+
+
+
+sttatusCheck(){
+if(this.count === 0){
+  this.status = true;
+}
 }
 
 
@@ -128,6 +148,42 @@ getStageIcon(status: number): string {
   }
 }
 
+
+getStageEmoji(status: number): string {
+  switch (status) {
+    case 0: return '📅'; // Scheduled
+    case 1: return '🏃'; // Started
+    case 2: return '⚡'; // Charge Mix
+    default: return '🔥';
+  }
+}
+
+
+getCurrentStageIndex(furnace: any): number {
+  if (!furnace.stages || furnace.stages.length === 0) {
+    return -1;
+  }
+  return Math.max(...furnace.stages.map((s: any) => s.status));
+}
+
+
+
+isFinished(stageStatus: number, currentIndex: number): boolean {
+  return stageStatus < currentIndex;
+}
+
+isCurrent(stageStatus: number, currentIndex: number): boolean {
+  return stageStatus === currentIndex;
+}
+
+isUpcoming(stageStatus: number, currentIndex: number): boolean {
+  return stageStatus > currentIndex;
+}
+
+getStageDate(furnace: any, status: number): string | null {
+  const found = furnace.stages.find((s: any) => s.status === status);
+  return found ? found.createdAt : null;
+}
 
 
 
