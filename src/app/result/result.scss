@@ -461,12 +461,19 @@ td.normal {
 }
 
 
-
 /* Graph UI CSS */
 .dashboard-container2 {
     max-width:2200px;
     width: min(96%,2200px);
+    margin: auto;
 }
+
+
+
+.page-center-wrapper {
+    padding-top: 120px;
+}
+
 
 /* Header Styles */
 .main-header {
@@ -475,23 +482,44 @@ td.normal {
 }
 
 .main-header h1 {
-    font-size: clamp(1.6rem, 1.1vw + 1rem, 3.2rem);
+    font-size: 40px;
     font-weight: 600;
     color: #d0c9ff;
     margin-bottom: 0.3rem;
 }
 
-.main-header .subtitle {
-    font-size: clamp(0.9rem, 0.5vw + 0.6rem, 1.25rem);
-    color: #a09ab0;
-    margin-bottom: 0.4rem;
+
+.row {
+  display: flex;
+  justify-content: space-between; /* LEFT & RIGHT */
+  align-items: center;
+  width: 100%;
+}
+
+.left-text {
+    text-align: left;
+    font-size: clamp(1.9rem, 0.5vw + 0.6rem, 1.25rem);
+    color: #ffffff;
+    margin-bottom: -10.4rem;
+    font-weight: bold;
+    padding-left: 10px;
+  }
+
+.right-text {
+  text-align: right;
+  font-size: clamp(1.9rem, 0.5vw + 0.6rem, 1.25rem);
+  color: #ffffff;
+  margin-bottom: -10.4rem;
+  font-weight: bold;
+  padding-right: 10px;
 }
 
 /* Grid Layout - give each card enough minimum width for TV screens */
 .charts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-    gap: clamp(12px, 1.2vw, 36px);
+    column-gap: clamp(12px, 1.2vw, 36px);  /* left–right gap */
+    row-gap: 80px; 
 }
 
 /* Card Styles */
@@ -621,4 +649,8 @@ svg {
     html { font-size: clamp(20px, 1.05vw + 14px, 36px); }
     .chart-container { max-height: 900px; }
     .data-line { stroke-width: clamp(3px, 0.45vw, 10px); }
+}
+
+.card2:nth-child(n+5) {
+    margin-top: 50px;   /* affects cards 5,6,7,8 only */
 }

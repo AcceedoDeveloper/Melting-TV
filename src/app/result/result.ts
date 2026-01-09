@@ -49,6 +49,8 @@ ngOnInit(): void {
   });
 
   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
+    console.log('socket io data', data);
+    
     this.rawData = data;
 
     this.selectedResult = data.find(
