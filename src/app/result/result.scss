@@ -459,3 +459,166 @@ td.normal {
   position: relative;
   align-self: center;      /* KEY FIX */
 }
+
+
+
+/* Graph UI CSS */
+.dashboard-container2 {
+    max-width:2200px;
+    width: min(96%,2200px);
+}
+
+/* Header Styles */
+.main-header {
+    text-align: center;
+    margin-bottom: clamp(18px, 2vw, 48px);
+}
+
+.main-header h1 {
+    font-size: clamp(1.6rem, 1.1vw + 1rem, 3.2rem);
+    font-weight: 600;
+    color: #d0c9ff;
+    margin-bottom: 0.3rem;
+}
+
+.main-header .subtitle {
+    font-size: clamp(0.9rem, 0.5vw + 0.6rem, 1.25rem);
+    color: #a09ab0;
+    margin-bottom: 0.4rem;
+}
+
+/* Grid Layout - give each card enough minimum width for TV screens */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: clamp(12px, 1.2vw, 36px);
+}
+
+/* Card Styles */
+.card2 {
+    background-color: #251f35;
+    border-radius: clamp(10px, 1vw, 20px);
+    padding: clamp(16px, 2vw, 40px);
+    box-shadow: inset 0 0 clamp(12px, 1vw, 30px) rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    overflow: visible;
+}
+
+.card2:hover {
+    transform: translateY(-4px);
+}
+
+/* Card Header (Symbol & Value) */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(12px, 1.2vw, 24px);
+}
+
+.element-symbol {
+    font-size: clamp(1.4rem, 1.2vw + 0.6rem, 2.8rem);
+    font-weight: 700;
+}
+
+.element-value {
+    font-size: clamp(1.4rem, 1.2vw + 0.6rem, 2.8rem);
+    font-weight: 700;
+}
+
+/* Chart Container & SVG - use aspect-ratio so charts look natural on TVs */
+.chart-container {
+    width: 100%;
+    aspect-ratio: 16/9;
+    /* Let card expand vertically if needed on very large screens */
+    max-height: clamp(220px, 35vh, 900px);
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible; /* Allow labels to extend slightly */
+}
+
+/* SVG Elements Styling: use viewport-relative stroke-widths */
+.grid-line {
+    stroke: #443c57;
+    stroke-width: clamp(0.5px, 0.07vw, 2px);
+    stroke-dasharray: 4, 4; /* Dashed lines */
+}
+
+.y-label, .x-label {
+    font-size: clamp(0.7rem, 0.25vw + 0.6rem, 1.1rem);
+    fill: #8a839e;
+    text-anchor: middle;
+}
+
+.y-label {
+    text-anchor: end;
+    dominant-baseline: middle;
+}
+
+.data-line {
+    fill: none;
+    stroke-width: clamp(2px, 0.3vw, 8px);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.data-point {
+    stroke-width: clamp(1px, 0.2vw, 5px);
+}
+
+/* Color Themes (same colors but adjusted if needed) */
+.theme-cyan {
+    border: 1px solid rgba(79, 209, 197, 0.3);
+    box-shadow: inset 0 0 15px rgba(79, 209, 197, 0.08);
+}
+.theme-cyan .element-symbol,
+.theme-cyan .element-value {
+    color: #81e6d9;
+}
+.theme-cyan .data-line { stroke: #81e6d9; }
+.theme-cyan .data-point { fill:#1a1528; stroke: #81e6d9; }
+
+.theme-yellow {
+    border: 1px solid rgba(246, 224, 94, 0.3);
+    box-shadow: inset 0 0 15px rgba(246, 224, 94, 0.08);
+}
+.theme-yellow .element-symbol,
+.theme-yellow .element-value { color: #f6e05e; }
+.theme-yellow .data-line { stroke: #f6e05e; }
+.theme-yellow .data-point { fill:#1a1528; stroke: #f6e05e; }
+
+.theme-red {
+    border: 1px solid rgba(245, 101, 101, 0.3);
+    box-shadow: inset 0 0 15px rgba(245, 101, 101, 0.08);
+}
+.theme-red .element-symbol,
+.theme-red .element-value { color: #f56565; }
+.theme-red .data-line { stroke: #f56565; }
+.theme-red .data-point { fill:#1a1528; stroke: #f56565; }
+
+/* Responsive Adjustments for smaller screens remain */
+@media (max-width: 768px) {
+    .charts-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .main-header h1 {
+        font-size: 1.8rem;
+    }
+}
+
+/* Extra large screen tweaks: 4K TVs and bigger */
+@media (min-width: 1600px) {
+    :root { --max-width: 2800px; }
+    .charts-grid { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: clamp(18px, 1.2vw, 48px); }
+    .chart-container { max-height: 520px; }
+}
+
+@media (min-width: 2560px) {
+    html { font-size: clamp(20px, 1.05vw + 14px, 36px); }
+    .chart-container { max-height: 900px; }
+    .data-line { stroke-width: clamp(3px, 0.45vw, 10px); }
+}

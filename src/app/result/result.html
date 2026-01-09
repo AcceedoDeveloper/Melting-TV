@@ -198,7 +198,7 @@
 
 
 
-<div *ngIf="!selectedResult" >
+<div *ngIf="!selectedResult && rawData.length > 0" >
 
 
   <div class="dashboard-container">
@@ -264,6 +264,265 @@
 
    
     </div>
+
+
+
+</div>
+
+
+
+
+
+<div  *ngIf="rawData.length === 0" >
+
+     <div class="dashboard-container2">
+        <header class="main-header">
+            <h1>Spectro Lab Furnace Results</h1>
+            <p class="subtitle">Client: ABC</p>
+            <p class="subtitle">Product: Steel 123</p>
+        </header>
+
+        <div class="charts-grid">
+            <div class="card2 theme-cyan">
+                <div class="card-header">
+                    <span class="element-symbol">Mo</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">400</text>
+                        </g>
+                        <polyline points="80,120 150,95 190,105 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="120" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="105" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-yellow">
+                <div class="card-header">
+                    <span class="element-symbol">P</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">400</text>
+                        </g>
+                        <polyline points="80,115 150,95 190,100 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="115" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="100" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-red">
+                <div class="card-header">
+                    <span class="element-symbol">Sn</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">600</text>
+                        </g>
+                        <polyline points="80,125 150,95 190,105 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="125" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="105" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-cyan">
+                <div class="card-header">
+                    <span class="element-symbol">Cr</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">400</text>
+                        </g>
+                        <polyline points="80,125 150,95 190,105 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="125" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="105" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-yellow">
+                <div class="card-header">
+                    <span class="element-symbol">Si</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">400</text>
+                        </g>
+                        <polyline points="80,125 150,95 190,100 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="125" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="100" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-red">
+                <div class="card-header">
+                    <span class="element-symbol">Cr</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">600</text>
+                        </g>
+                        <polyline points="80,125 150,95 190,105 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="125" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="105" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-cyan">
+                <div class="card-header">
+                    <span class="element-symbol">Cr</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">400</text>
+                        </g>
+                        <polyline points="80,125 150,95 190,105 220,80 290,65" class="data-line" />
+                        <circle cx="80" cy="125" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="105" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="65" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="card2 theme-yellow">
+                <div class="card-header">
+                    <span class="element-symbol">Mn</span>
+                    <span class="element-value">5%</span>
+                </div>
+                <div class="chart-container">
+                    <svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg">
+                        <g class="grid">
+                            <line x1="30" y1="130" x2="310" y2="130" class="grid-line" />
+                            <line x1="30" y1="70" x2="310" y2="70" class="grid-line" />
+                            <line x1="30" y1="45" x2="310" y2="45" class="grid-line" />
+                            <text x="25" y="135" class="y-label">0</text>
+                            <text x="25" y="75" class="y-label">5%</text>
+                            <text x="25" y="50" class="y-label">7%</text>
+                            <text x="80" y="155" class="x-label">100</text>
+                            <text x="150" y="155" class="x-label">200</text>
+                            <text x="220" y="155" class="x-label">300</text>
+                            <text x="290" y="155" class="x-label">400</text>
+                        </g>
+                        <polyline points="80,125 150,95 190,100 220,80 290,70" class="data-line" />
+                        <circle cx="80" cy="125" r="4" class="data-point" />
+                        <circle cx="150" cy="95" r="4" class="data-point" />
+                        <circle cx="190" cy="100" r="4" class="data-point" />
+                        <circle cx="220" cy="80" r="4" class="data-point" />
+                        <circle cx="290" cy="70" r="4" class="data-point" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
 
 
 
