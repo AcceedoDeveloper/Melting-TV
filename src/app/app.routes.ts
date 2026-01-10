@@ -3,6 +3,6 @@ import { Result } from './result/result';
 import { Bunker } from './bunker/bunker';
 
 export const routes: Routes = [
-  { path: 'result', component: Result },
+  { path: '', component: Result },
   { path: 'bunker', component: Bunker }
 ];
