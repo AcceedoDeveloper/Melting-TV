@@ -6,10 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SocketService {
+
   private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io('http://10.33.168.218:3003'); 
+    this.socket = io('http://localhost:3003', {   
+      transports: ['websocket'],               
+      upgrade: false
+    });
+
+    this.socket.on('connect', () => {
+      console.log(' Socket connected');
+    });
+
+    this.socket.on('disconnect', () => {
+      console.log(' Socket disconnected');
+    });
   }
 
   on<T>(event: string): Observable<T> {
@@ -17,7 +29,6 @@ export class SocketService {
       this.socket.on(event, (data: T) => {
         observer.next(data);
       });
-
       return () => this.socket.off(event);
     });
   }

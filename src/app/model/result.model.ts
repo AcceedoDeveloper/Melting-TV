@@ -42,10 +42,10 @@ export interface ElementResult {
 }
 
 
-export  interface SpectrumElement {
-  alloyId: string;
-  name: string;
-  abbr: string;
-  labResult: number;
-  weightToBeAdded: number;
+export interface SpectrumElement {
+  abbr?: string;
+  labResult?: number;
+  weightToBeAdded?: number;
+  isPlaceholder?: boolean;
+  qtyTaken?: number;
 }

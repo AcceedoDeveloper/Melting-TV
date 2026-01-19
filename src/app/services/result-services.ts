@@ -9,16 +9,13 @@ import { Observable } from 'rxjs';
 })
 export class ResultServices {
 
-  
-
   constructor(private http: HttpClient) {
   }
 
+getResults(): Observable<ResultResponse[]> {
+const api = 'http://localhost:3003/planning/spectrum/from-furnace';
+  return this.http.get<ResultResponse[]>(api);
+}
 
-  getResults() : Observable<ResultResponse[]> {
-
-const api = 'http://10.0.2.2:3003/planning/spectrum/from-furnace';
-    return this.http.get<ResultResponse[]>(api);
-  }
   
 }

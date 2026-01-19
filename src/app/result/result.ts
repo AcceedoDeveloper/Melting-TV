@@ -3,14 +3,8 @@ import { ResultServices } from '../services/result-services';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { SocketService } from '../services/socket.service';
+import { SpectrumElement } from '../model/result.model';
 
-interface SpectrumElement {
-  abbr?: string;
-  labResult?: number;
-  weightToBeAdded?: number;
-  isPlaceholder?: boolean;
-  qtyTaken?: number;
-}
 
 @Component({
   selector: 'app-result',
@@ -185,6 +179,31 @@ isUpcoming(stageStatus: number, currentIndex: number): boolean {
 getStageDate(furnace: any, status: number): string | null {
   const found = furnace.stages.find((s: any) => s.status === status);
   return found ? found.createdAt : null;
+}
+
+
+
+getStageDuration(furnace: any, status: number): string {
+  const stages = furnace.stages;
+
+  const current = stages.find((s: any) => s.status === status);
+  const next = stages.find((s: any) => s.status === status + 1);
+
+  if (!current || !next) return '';
+
+  const start = new Date(current.createdAt).getTime();
+  const end = new Date(next.createdAt).getTime();
+
+  const diffSec = Math.floor((end - start) / 1000);
+
+  const min = Math.floor(diffSec / 60);
+  const sec = diffSec % 60;
+
+  return `${min}:${sec.toString().padStart(2, '0')}`;
+}
+
+getCorrectionStages(furnace: any) {
+  return furnace.stages?.filter((s: any) => s.status >= 3) || [];
 }
 
 
