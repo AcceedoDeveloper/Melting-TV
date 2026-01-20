@@ -1,5 +1,8 @@
-<div class="wrapper"  *ngIf="selectedResult as result">
-  <!-- HEADER -->
+<div class="wrapper"  *ngIf="selectedResult  as result">
+
+
+  <ng-container *ngIf="shouldShowResultUI(result)">
+    <!-- HEADER -->
   <div class="header">
     <div class="header-section">
       <div class="logo">
@@ -141,12 +144,14 @@
       </tbody>
     </table>
   </div>
+  </ng-container>
+  
 </div>
 
 
 
 
-<div *ngIf="!selectedResult && rawData.length > 0">
+<div *ngIf="!selectedResult || !shouldShowResultUI(selectedResult) && rawData.length > 0">
   <div class="page-container" *ngFor="let item of rawData">
     <header class="top-nav">
       <div class="nav-left">

@@ -13,3 +13,15 @@ html, body {
   padding: 60px 80px;   // SAFE AREA for TV overscan
   box-sizing: border-box;
 }
+
+
+
+/* DEFAULT (Timeline) */
+body.bg-white {
+  background-color: #ffffff;
+}
+
+/* RESULT VIEW */
+body.bg-red {
+  background-color: #43536b; // TV-safe red
+}

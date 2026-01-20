@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import { SpectrumElement } from '../model/result.model';
+import { Renderer2 } from '@angular/core';
 
 
 @Component({
@@ -27,7 +28,10 @@ export class Result implements OnInit {
 ];
 
 
-  constructor(private resultServices: ResultServices, private cdRef: ChangeDetectorRef, private socketService: SocketService) {}
+  constructor(private resultServices: ResultServices, 
+    private cdRef: ChangeDetectorRef, 
+    private socketService: SocketService,
+    private renderer: Renderer2) {}
 
 // ngOnInit(): void {
 
@@ -60,8 +64,6 @@ ngOnInit(): void {
 
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
-    console.log('data', this.rawData);
-    
 
     this.selectedResult = data.find(
       (d: any) => d.spectrumResults?.length > 0
@@ -71,12 +73,13 @@ ngOnInit(): void {
       this.calculateStatus(this.selectedResult);
     }
 
+    // ✅ ADD HERE
+    this.updateBackground();
+
     this.cdRef.detectChanges();
   });
 
   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
-    console.log('socket io data', data);
-
     this.rawData = data;
 
     this.selectedResult = data.find(
@@ -87,9 +90,13 @@ ngOnInit(): void {
       this.calculateStatus(this.selectedResult);
     }
 
+    // ✅ ADD HERE ALSO
+    this.updateBackground();
+
     this.cdRef.detectChanges();
   });
 }
+
 
   
 
@@ -268,6 +275,36 @@ calculateStatus(result: any) {
 
   this.status = this.count === 0;
 }
+
+
+shouldShowResultUI(result: any): boolean {
+  return (
+    result?.spectrumResults?.length === 1 &&
+    result?.spectrumResults?.[0]?.isViewed === false
+  );
+}
+
+get isResultView(): boolean {
+  return !!(
+    this.selectedResult &&
+    this.shouldShowResultUI(this.selectedResult)
+  );
+}
+
+
+updateBackground(): void {
+  const body = document.body;
+
+  this.renderer.removeClass(body, 'bg-red');
+  this.renderer.removeClass(body, 'bg-white');
+
+  if (this.isResultView) {
+    this.renderer.addClass(body, 'bg-red');
+  } else {
+    this.renderer.addClass(body, 'bg-white');
+  }
+}
+
 
 
 
