@@ -29,27 +29,63 @@ export class Result implements OnInit {
 
   constructor(private resultServices: ResultServices, private cdRef: ChangeDetectorRef, private socketService: SocketService) {}
 
+// ngOnInit(): void {
+
+//   this.resultServices.getResults().subscribe((data: any[]) => {
+//     this.rawData = data;
+//     console.log('full data', this.rawData);
+
+//     this.selectedResult = data.find(
+//       (d: any) => d.spectrumResults?.length > 0
+//     );
+
+//     this.cdRef.detectChanges();
+//   });
+
+//   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
+//     console.log('socket io data', data);
+    
+//     this.rawData = data;
+
+//     this.selectedResult = data.find(
+//       (d: any) => d.spectrumResults?.length > 0
+//     );
+
+//     this.cdRef.detectChanges();
+//   });
+// }
+
+
 ngOnInit(): void {
 
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
-    console.log('full data', this.rawData);
+    console.log('data', this.rawData);
+    
 
     this.selectedResult = data.find(
       (d: any) => d.spectrumResults?.length > 0
     );
+
+    if (this.selectedResult) {
+      this.calculateStatus(this.selectedResult);
+    }
 
     this.cdRef.detectChanges();
   });
 
   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
     console.log('socket io data', data);
-    
+
     this.rawData = data;
 
     this.selectedResult = data.find(
       (d: any) => d.spectrumResults?.length > 0
     );
+
+    if (this.selectedResult) {
+      this.calculateStatus(this.selectedResult);
+    }
 
     this.cdRef.detectChanges();
   });
@@ -204,6 +240,33 @@ getStageDuration(furnace: any, status: number): string {
 
 getCorrectionStages(furnace: any) {
   return furnace.stages?.filter((s: any) => s.status >= 3) || [];
+}
+
+
+calculateStatus(result: any) {
+  this.count = 0;
+
+  const elements = result?.spectrumResults?.[0]?.result || [];
+
+  for (const el of elements) {
+    if (
+      el.percent === undefined ||
+      el.plus === undefined ||
+      el.minus === undefined ||
+      el.labResult === undefined
+    ) {
+      continue;
+    }
+
+    const lower = el.percent - el.minus;
+    const upper = el.percent + el.plus;
+
+    if (el.labResult < lower || el.labResult > upper) {
+      this.count++;
+    }
+  }
+
+  this.status = this.count === 0;
 }
 
 

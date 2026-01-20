@@ -1,3 +1,151 @@
+<div class="wrapper"  *ngIf="selectedResult as result">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-section">
+      <div class="logo">
+        <div class="logo-text">
+          <!-- <div class="title">ACCEEDO</div>
+          <div class="sub">MeltPro</div> -->
+          <img style="height: 60px;" src="assets/logo.png" alt="Acceedo Logo" />
+        </div>
+      </div>
+      <div class="header-line"></div>
+    </div>
+    
+
+    <div class="header-section center">
+      FURNACE-{{ result.spectrumResults[0]?.furnaceNo }}
+    </div>
+
+    <div class="header-section right">
+      <div class="header-line"></div>
+      Heat No :
+      <b>{{ result.spectrumResults[0]?.heatNo }}</b>
+    </div>
+  </div>
+
+  <!-- INFO CARD -->
+  <div class="card">
+    <div class="card-top">
+      <div class="heat-no" >
+        Result received at :
+        <b>{{
+          result.spectrumResults[0]?.createdAt
+            | date : "MMM dd, yyyy hh:mm a"
+        }}</b>
+      </div>
+
+      
+
+      <!-- <div class="heat-no">
+        Method :
+        <b>{{ result.spectrumResults[0]?.Grade }}</b>
+      </div> -->
+
+
+      <div class="right" *ngIf="status" >
+        <span class="tested-ok"> TESTED OK ✔</span>
+      </div>
+
+      <div class="right" *ngIf="!status" >
+<span class="not-tested">Failed 
+  <img src="assets/cross.png" alt="Failed" style="    height: 20px;
+    width: 20px;
+    margin-left: 4px;
+    padding-top: 3px;"/>
+</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="info-grid">
+      <div class="info-item">
+        <label>Customer Name</label><br />
+        <span>{{ result.customerName }}</span>
+      </div>
+
+      <div class="info-item">
+        <label>Part Name</label><br />
+        <span>{{ result.productName }}</span>
+      </div>
+
+      <div class="info-item">
+        <label>Stage</label><br />
+        <span>{{ result.spectrumResults[0]?.stage }}</span>
+      </div>
+
+      <div class="info-item">
+        <label>Checked By</label><br />
+        <span>{{ result.spectrumResults[0]?.testedBy }}</span>
+      </div>
+
+      <div class="info-item">
+        <label>Grade</label><br />
+        <span>{{ result.spectrumResults[0]?.Grade }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-card">
+    <div class="table-title">Spectro Lab Results</div>
+
+    <table>
+      <tbody>
+        <ng-container
+          *ngFor="
+            let group of chunkArray(result.spectrumResults[0]?.result, 10);
+            let i = index
+          "
+        >
+          <!-- GAP BETWEEN SECTIONS -->
+          <tr *ngIf="i > 0" class="gap-row">
+            <td colspan="8"></td>
+          </tr>
+
+          <!-- ELEMENT HEADER -->
+          <tr>
+            <th>Element</th>
+            <th *ngFor="let el of group">
+              {{ el.isPlaceholder ? "-" : el.abbr }}
+            </th>
+          </tr>
+
+          <!-- RESULT -->
+          <tr>
+  <td>Result %</td>
+  <td
+    *ngFor="let el of group"
+    [ngClass]="!el.isPlaceholder ? getResultClass(el) : ''"
+  >
+    {{ el.isPlaceholder ? "-" : el.labResult }}
+  </td>
+</tr>
+
+
+          <!-- REQUIRED -->
+          <tr>
+            <td>Required</td>
+            <td *ngFor="let el of group">
+              {{ el.isPlaceholder ? "-" : el.weightToBeAdded + " Kg" }}
+            </td>
+          </tr>
+
+          <!-- ACTUAL -->
+          <tr>
+            <td>Actual Kg</td>
+            <td *ngFor="let el of group" class="danger">
+              <span *ngIf="el.qtyTaken !== undefined"  >{{ el.isPlaceholder ? "-" : el.qtyTaken + " Kg" }}</span>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
 <div *ngIf="!selectedResult && rawData.length > 0">
   <div class="page-container" *ngFor="let item of rawData">
     <header class="top-nav">
