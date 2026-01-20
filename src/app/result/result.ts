@@ -65,6 +65,9 @@ ngOnInit(): void {
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
 
+    console.log('data', this.rawData);
+    
+
     this.selectedResult = data.find(
       (d: any) => d.spectrumResults?.length > 0
     );
@@ -300,9 +303,25 @@ updateBackground(): void {
 
   if (this.isResultView) {
     this.renderer.addClass(body, 'bg-red');
-  } else {
+  }
+  else if (this.rawData.length === 0) {
+    this.renderer.addClass(body, 'bg-red');
+  }
+   else {
     this.renderer.addClass(body, 'bg-white');
   }
+}
+
+
+getChemistryStages(furnace: any) {
+  if (!furnace?.stages) return [];
+
+  return furnace.stages
+    .filter((s: any) => s.status === 3) // Chemistry Correction
+    .map((stage: any, index: number) => ({
+      ...stage,
+      displayIndex: index + 1 // 1,2,3,4
+    }));
 }
 
 

@@ -152,12 +152,36 @@
 
 
 <div *ngIf="!selectedResult || !shouldShowResultUI(selectedResult) && rawData.length > 0">
+
+  <div class="side-header">
+        <div class="logo-box">
+            <img src="assets/logo.png" alt="Sandfits Casting Excellence">
+        </div>
+        <div class="title center-title">
+            Furnace Management System
+        </div>
+          <div class="date-box">
+    19/01/2026
+    </div>
+    </div>
+
   <div class="page-container" *ngFor="let item of rawData">
+
+<div class="custom-outer-border">
+
     <header class="top-nav">
       <div class="nav-left">
+
+    <div class="border">
+
         <h2>{{ item.furnaceName }}</h2>
       </div>
+
+      </div>
+
     </header>
+
+    <div class="stage-title">Stages</div>
 
     <div class="process-timeline">
       <div class="base-line"></div>
@@ -252,9 +276,50 @@
         </div>
       </div>
 
+      <div
+  class="step-item"
+  *ngFor="let chem of getChemistryStages(item); let i = index"
+>
+  <div class="node">
+    <div class="step-num">{{ 4 + i }}</div>
+
+    <div class="icon-circle border-orange">
+      <img src="assets/icon3.png" class="step-icon" />
+    </div>
+  </div>
+
+  <div class="time-badge">
+    🕒
+    {{
+      chem.createdAt
+        ? (getStageDuration(item, 2 + i) || '--')
+        : '--'
+    }}
+  </div>
+
+  <div class="content-card top-orange">
+    <h4>Chemistry Correction {{ chem.displayIndex }}</h4>
+
+    <p class="info">
+      Date:
+      {{ chem.createdAt | date: 'yyyy-MM-dd' }}
+    </p>
+
+    <p class="info">
+      Time:
+      {{ chem.createdAt | date: 'hh:mm a' }}
+    </p>
+
+    <div class="status stage">
+      <span class="i-icon">i</span>
+      {{ chem.name }}
+    </div>
+  </div>
+</div>
+
+
       <div class="step-item">
         <div class="node">
-          <div class="step-num">{{ item.stages.length }}</div>
           <div class="icon-circle border-orange">
             <img src="assets/icon3.png" class="step-icon" />
           </div>
@@ -272,7 +337,6 @@
 
       <div class="step-item">
         <div class="node">
-          <div class="step-num">7</div>
           <div class="icon-circle border-red">
             <img src="assets/icon2.png" class="step-icon" />
           </div>
@@ -288,6 +352,9 @@
     </div>
   </div>
 </div>
+
+</div>
+
 
 <div *ngIf="rawData.length === 0">
   <div *ngIf="rawData.length === 0">
@@ -655,3 +722,4 @@
     </div>
   </div>
 </div>
+

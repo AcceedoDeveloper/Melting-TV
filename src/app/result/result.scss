@@ -331,6 +331,7 @@ td.normal {
 
 /* Timer Badge between steps */
 .time-badge {
+  opacity: 0;
     position: absolute; top: 45px; right: -15px; background: #e2e8f0;
     font-size: 10px; padding: 3px 8px; border-radius: 12px;
     display: flex; align-items: center; gap: 3px; font-weight: 600; color: #475569;
@@ -392,6 +393,80 @@ td.normal {
     opacity: 0;
 }
 
+
+
+
+
+
+.custom-outer-border {
+  border: 1.5px solid #D6E3F0; 
+  border-radius: 15px;
+  padding: 40px;
+  background-color: #F1F6FB;
+  margin: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.border{
+  position: relative;
+  margin: -40px;
+  padding: 16px;
+  background-color: #F1F6FB;
+  border: 1.5px solid #D6E3F0;
+}
+
+
+.side-header {
+  position: relative;
+  background-color: #F1F6FB;
+  border: 1.5px solid #D6E3F0;
+  border-radius: 15px;          
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 15px 28px;           
+  margin: 20px;
+}
+
+.logo-box img {
+  height: 58px;                
+  width: auto;
+  object-fit: contain;
+}
+
+
+/* Title */
+.center-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 26px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.date-box {
+  margin-left: auto;              
+  font-size: 22px;
+  font-weight: 600;
+  color: #000000;
+}
+
+
+.stage-title {
+  position: sticky;
+  left: 30px;                 
+  top: 50%;                   
+  transform: translateY(-50%);
+  margin: 0;
+  font-size: 28px;
+  font-weight: 600;
+  color: #111827;
+}
 
 
 
