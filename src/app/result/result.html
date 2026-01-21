@@ -1,4 +1,12 @@
-<div class="wrapper"  *ngIf="selectedResult  as result">
+<!-- <div>
+  enter the IP <input type="text" [(ngModel)]="ip" />
+  <button (click)="setIP(ip)">Set IP</button>
+</div> -->
+
+
+<div class="IP-pop" >
+
+  <div class="wrapper"  *ngIf="selectedResult  as result">
 
 
   <ng-container *ngIf="shouldShowResultUI(result)">
@@ -9,7 +17,7 @@
         <div class="logo-text">
           <!-- <div class="title">ACCEEDO</div>
           <div class="sub">MeltPro</div> -->
-          <img style="height: 60px;" src="assets/logo.png" alt="Acceedo Logo" />
+          <img style="height: 60px;" src="assets/indoshell-logo-removebg-preview.png" alt="Acceedo Logo" />
         </div>
       </div>
       <div class="header-line"></div>
@@ -155,13 +163,13 @@
 
   <div class="side-header">
         <div class="logo-box">
-            <img src="assets/logo.png" alt="Sandfits Casting Excellence">
+            <img src="assets/indoshell-logo-removebg-preview.png" alt="Sandfits Casting Excellence">
         </div>
         <div class="title center-title">
             Furnace Management System
         </div>
           <div class="date-box">
-{{ today | date: 'dd/MM/yyyy' }}
+{{ today | date:'dd-MMM-yyyy : HH : mm a' }}
     </div>
     </div>
 
@@ -722,4 +730,8 @@
     </div>
   </div>
 </div>
+
+</div>
+
+
 

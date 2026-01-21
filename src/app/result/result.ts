@@ -5,11 +5,11 @@ import { ChangeDetectorRef } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import { SpectrumElement } from '../model/result.model';
 import { Renderer2 } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-result',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './result.html',
   styleUrl: './result.scss',
 })
@@ -20,6 +20,7 @@ export class Result implements OnInit {
   count: number = 0;
 
   today = new Date();
+  ip : string = '';
 
 
   ALL_STAGES = [
@@ -261,5 +262,9 @@ export class Result implements OnInit {
         ...stage,
         displayIndex: index + 1,
       }));
+  }
+
+  setIP(ip: string) {
+    console.log('IP', ip);
   }
 }
