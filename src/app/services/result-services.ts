@@ -13,7 +13,7 @@ export class ResultServices {
   }
 
 getResults(): Observable<ResultResponse[]> {
-const api = 'http://localhost:3003/planning/spectrum/from-furnace';
+const api = 'http://103.5.113.101:9006/planning/spectrum/from-furnace';
   return this.http.get<ResultResponse[]>(api);
 }
 

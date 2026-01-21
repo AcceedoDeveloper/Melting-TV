@@ -10,7 +10,7 @@ export class SocketService {
   private socket: SocketIOClient.Socket;
 
   constructor() {
-    this.socket = io('http://localhost:3003', {   
+    this.socket = io('http://103.5.113.101:9006/', {   
       transports: ['websocket'],               
       upgrade: false
     });
