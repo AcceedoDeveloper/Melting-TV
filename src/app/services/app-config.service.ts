@@ -16,7 +16,7 @@ export class AppConfigService {
 
   getApiBaseUrl(): string {
     const ip = this.getIp();
-    return ip ? `${ip}` : '';
+    return ip ? `http://${ip}` : '';
   }
 
   clearIp(): void {

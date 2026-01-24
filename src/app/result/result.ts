@@ -6,6 +6,7 @@ import { SocketService } from '../services/socket.service';
 import { SpectrumElement } from '../model/result.model';
 import { Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AppConfigService } from '../services/app-config.service';
 
 @Component({
   selector: 'app-result',
@@ -21,6 +22,7 @@ export class Result implements OnInit {
 
   today = new Date();
   ip : string = '';
+  isIPSet: boolean = false;
 
 
   ALL_STAGES = [
@@ -35,43 +37,59 @@ export class Result implements OnInit {
     private cdRef: ChangeDetectorRef,
     private socketService: SocketService,
     private renderer: Renderer2,
+    private config: AppConfigService,
   ) {}
 
-  ngOnInit(): void {
-    this.resultServices.getResults().subscribe((data: any[]) => {
-      this.rawData = data;
+  // ngOnInit(): void {
+  //   console.log('ip', this.ip);
+    
+  //   this.resultServices.getResults().subscribe((data: any[]) => {
+  //     this.rawData = data;
 
-      console.log('data', this.rawData);
+  //     console.log('data', this.rawData);
 
-      this.selectedResult = data.find(
-        (d: any) => d.spectrumResults?.length > 0,
-      );
+  //     this.selectedResult = data.find(
+  //       (d: any) => d.spectrumResults?.length > 0,
+  //     );
 
-      if (this.selectedResult) {
-        this.calculateStatus(this.selectedResult);
-      }
+  //     if (this.selectedResult) {
+  //       this.calculateStatus(this.selectedResult);
+  //     }
 
-      this.updateBackground();
+  //     this.updateBackground();
 
-      this.cdRef.detectChanges();
-    });
+  //     this.cdRef.detectChanges();
+  //   });
 
-    this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
-      this.rawData = data;
+  //   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
+  //     this.rawData = data;
 
-      this.selectedResult = data.find(
-        (d: any) => d.spectrumResults?.length > 0,
-      );
+  //     this.selectedResult = data.find(
+  //       (d: any) => d.spectrumResults?.length > 0,
+  //     );
 
-      if (this.selectedResult) {
-        this.calculateStatus(this.selectedResult);
-      }
+  //     if (this.selectedResult) {
+  //       this.calculateStatus(this.selectedResult);
+  //     }
 
-      this.updateBackground();
+  //     this.updateBackground();
 
-      this.cdRef.detectChanges();
-    });
+  //     this.cdRef.detectChanges();
+  //   });
+  // }
+
+
+ngOnInit(): void {
+  const savedIp = this.config.getIp();
+
+  if (savedIp) {
+    this.ip = savedIp;
+    this.isIPSet = true;
+
+    this.initializeData(); 
   }
+}
+
 
   chunkArray(
     array: SpectrumElement[] | null | undefined,
@@ -264,7 +282,60 @@ export class Result implements OnInit {
       }));
   }
 
-  setIP(ip: string) {
-    console.log('IP', ip);
+setIP() {
+  if (!this.ip || this.ip.trim() === '') {
+    return;
   }
+
+  this.config.setIp(this.ip);      
+  this.isIPSet = true;
+
+  this.initializeData();          
+}
+
+initializeData() {
+  this.resultServices.getResults().subscribe((data: any[]) => {
+    this.rawData = data;
+    console.log('data', this.rawData);
+
+    this.selectedResult = data.find(
+      (d: any) => d.spectrumResults?.length > 0
+    );
+
+    if (this.selectedResult) {
+      this.calculateStatus(this.selectedResult);
+    }
+
+    this.updateBackground();
+    this.cdRef.detectChanges();
+  });
+
+  this.socketService.connect(this.ip);
+
+  this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
+    this.rawData = data;
+    console.log('live data', this.rawData);
+    
+
+    console.log('Socket data received:', data);
+    this.selectedResult = data.find(
+      (d: any) => d.spectrumResults?.length > 0
+    );
+
+    if (this.selectedResult) {
+      this.calculateStatus(this.selectedResult);
+    }
+
+    this.updateBackground();
+    this.cdRef.detectChanges();
+  });
+}
+
+resetIP() {
+  this.config.clearIp();
+  this.isIPSet = false;
+  this.socketService.disconnect();
+}
+
+
 }
