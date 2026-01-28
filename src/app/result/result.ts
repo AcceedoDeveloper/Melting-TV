@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy,HostListener} from '@angular/core';
 import { ResultServices } from '../services/result-services';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
@@ -7,14 +7,16 @@ import { SpectrumElement } from '../model/result.model';
 import { Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppConfigService } from '../services/app-config.service';
+import { KeepAwake } from '@capacitor-community/keep-awake';
 
 @Component({
   selector: 'app-result',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './result.html',
   styleUrl: './result.scss',
 })
-export class Result implements OnInit {
+export class Result implements OnInit,OnDestroy{
   rawData: any[] = [];
   selectedResult: any = null;
   status: boolean = false;
@@ -24,6 +26,7 @@ export class Result implements OnInit {
   ip : string = '';
   isIPSet: boolean = false;
 
+  isOnline: boolean = navigator.onLine;
 
   ALL_STAGES = [
     { status: 0, name: 'Scheduled' },
@@ -40,44 +43,17 @@ export class Result implements OnInit {
     private config: AppConfigService,
   ) {}
 
-  // ngOnInit(): void {
-  //   console.log('ip', this.ip);
-    
-  //   this.resultServices.getResults().subscribe((data: any[]) => {
-  //     this.rawData = data;
+@HostListener('window:online')
+  updateOnlineStatus() {
+    this.isOnline = true;
+    console.log('Network connected');
+  }
 
-  //     console.log('data', this.rawData);
-
-  //     this.selectedResult = data.find(
-  //       (d: any) => d.spectrumResults?.length > 0,
-  //     );
-
-  //     if (this.selectedResult) {
-  //       this.calculateStatus(this.selectedResult);
-  //     }
-
-  //     this.updateBackground();
-
-  //     this.cdRef.detectChanges();
-  //   });
-
-  //   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
-  //     this.rawData = data;
-
-  //     this.selectedResult = data.find(
-  //       (d: any) => d.spectrumResults?.length > 0,
-  //     );
-
-  //     if (this.selectedResult) {
-  //       this.calculateStatus(this.selectedResult);
-  //     }
-
-  //     this.updateBackground();
-
-  //     this.cdRef.detectChanges();
-  //   });
-  // }
-
+  @HostListener('window:offline')
+  updateOfflineStatus() {
+    this.isOnline = false;
+    console.log('Network disconnected');
+  }
 
 ngOnInit(): void {
   const savedIp = this.config.getIp();
@@ -90,6 +66,28 @@ ngOnInit(): void {
   }
 }
 
+ngOnDestroy(): void {
+    this.allowSleep();
+    this.socketService.disconnect();
+  }
+
+  async preventSleep() {
+    try {
+      await KeepAwake.keepAwake();
+      console.log('KeepAwake: Screen will stay ON');
+    } catch (e) {
+      console.error('KeepAwake Error:', e);
+    }
+  }
+
+  async allowSleep() {
+    try {
+      await KeepAwake.allowSleep();
+      console.log('KeepAwake: Screen allowed to sleep');
+    } catch (e) {
+      console.error('KeepAwake Error:', e);
+    }
+  }
 
   chunkArray(
     array: SpectrumElement[] | null | undefined,
@@ -294,6 +292,9 @@ setIP() {
 }
 
 initializeData() {
+
+  this.preventSleep();
+
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
     console.log('data', this.rawData);

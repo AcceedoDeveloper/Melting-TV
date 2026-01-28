@@ -1,3 +1,10 @@
+<div *ngIf="!isOnline" class="offline-banner">
+  <img src="assets/no-wifi.png" alt="off" style="width: 30px; height: 30px;">
+  ⚠️ NETWORK DISCONNECTED - CHECK LAN/WIFI
+</div>
+
+<div [ngClass]="{'result-container': true, 'bg-red': !isOnline || rawData.length === 0}">
+   </div>
 <div class="ip-center" *ngIf="!isIPSet">
   <div class="ip-card">
     <p class="ip-title">Enter the IP</p>
