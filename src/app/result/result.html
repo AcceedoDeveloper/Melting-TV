@@ -52,10 +52,10 @@
         <div class="logo-text">
           <!-- <div class="title">ACCEEDO</div>
           <div class="sub">MeltPro</div> -->
-          <img style="height: 60px;" src="assets/logo.png" alt="Acceedo Logo" />
-          <button class="change-ip-btn image-btn" (click)="resetIP()">
+          <img style="height: 40px;  margin-top: 15px; " src="assets/logo.png" alt="Acceedo Logo" />
+          <!-- <button class="change-ip-btn image-btn" (click)="resetIP()">
   <img src="assets/ip.png" alt="Change IP" />
-</button>
+</button> -->
 
         </div>
       </div>
@@ -71,6 +71,9 @@
       <div class="header-line"></div>
       Heat No :
       <b>{{ result.spectrumResults[0]?.heatNo }}</b>
+       <button class="change-ip-btn image-btn" (click)="resetIP()">
+  <img src="assets/cogwheel.png" alt="Change IP" />
+</button> 
     </div>
   </div>
 
@@ -210,6 +213,9 @@
           <div class="date-box">
 {{ today | date:'dd-MMM-yyyy : HH : mm a' }}
     </div>
+       <button class="change-ip-btn image-btn" (click)="resetIP()">
+  <img src="assets/cogwheel.png" alt="Change IP" />
+</button>
     </div>
 
   <div class="page-container" *ngFor="let item of rawData">

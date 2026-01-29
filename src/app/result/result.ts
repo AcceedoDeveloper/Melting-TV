@@ -45,11 +45,13 @@ export class Result implements OnInit,OnDestroy{
   ) {}
 
 async ngOnInit() {
-    // 1. Android-la current network status-ai check panna
     const status = await Network.getStatus();
+    console.log('status ', status);
+    
     this.isOnline = status.connected;
+    console.log('connection boolean ', this.isOnline);
+    
 
-    // 2. Network change aanaal listener trigger aagum
     Network.addListener('networkStatusChange', status => {
       this.isOnline = status.connected;
       this.updateBackground();
