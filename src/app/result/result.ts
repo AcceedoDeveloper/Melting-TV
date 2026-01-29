@@ -65,6 +65,7 @@ async ngOnInit() {
       this.initializeData();
     }
   }
+  
 
 // @HostListener('window:online')
 //   updateOnlineStatus() {
