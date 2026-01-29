@@ -1,13 +1,14 @@
-import { Component, OnInit,OnDestroy,HostListener} from '@angular/core';
+import { Component, OnInit,OnDestroy,ChangeDetectorRef} from '@angular/core';
 import { ResultServices } from '../services/result-services';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
+// import { ChangeDetectorRef } from '@angular/core';
 import { SocketService } from '../services/socket.service';
 import { SpectrumElement } from '../model/result.model';
 import { Renderer2 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppConfigService } from '../services/app-config.service';
 import { KeepAwake } from '@capacitor-community/keep-awake';
+import { Network } from '@capacitor/network';
 
 @Component({
   selector: 'app-result',
@@ -26,7 +27,7 @@ export class Result implements OnInit,OnDestroy{
   ip : string = '';
   isIPSet: boolean = false;
 
-  isOnline: boolean = navigator.onLine;
+  isOnline: boolean = true;
 
   ALL_STAGES = [
     { status: 0, name: 'Scheduled' },
@@ -43,32 +44,53 @@ export class Result implements OnInit,OnDestroy{
     private config: AppConfigService,
   ) {}
 
-@HostListener('window:online')
-  updateOnlineStatus() {
-    this.isOnline = true;
-    console.log('Network connected');
+async ngOnInit() {
+    // 1. Android-la current network status-ai check panna
+    const status = await Network.getStatus();
+    this.isOnline = status.connected;
+
+    // 2. Network change aanaal listener trigger aagum
+    Network.addListener('networkStatusChange', status => {
+      this.isOnline = status.connected;
+      this.updateBackground();
+      this.cdRef.detectChanges();
+    });
+
+    const savedIp = this.config.getIp();
+    if (savedIp) {
+      this.ip = savedIp;
+      this.isIPSet = true;
+      this.initializeData();
+    }
   }
 
-  @HostListener('window:offline')
-  updateOfflineStatus() {
-    this.isOnline = false;
-    console.log('Network disconnected');
-  }
+// @HostListener('window:online')
+//   updateOnlineStatus() {
+//     this.isOnline = true;
+//     console.log('Network connected');
+//   }
 
-ngOnInit(): void {
-  const savedIp = this.config.getIp();
+//   @HostListener('window:offline')
+//   updateOfflineStatus() {
+//     this.isOnline = false;
+//     console.log('Network disconnected');
+//   }
 
-  if (savedIp) {
-    this.ip = savedIp;
-    this.isIPSet = true;
+// ngOnInit(): void {
+//   const savedIp = this.config.getIp();
 
-    this.initializeData(); 
-  }
-}
+//   if (savedIp) {
+//     this.ip = savedIp;
+//     this.isIPSet = true;
+
+//     this.initializeData(); 
+//   }
+// }
 
 ngOnDestroy(): void {
     this.allowSleep();
     this.socketService.disconnect();
+    Network.removeAllListeners();
   }
 
   async preventSleep() {
@@ -268,6 +290,7 @@ ngOnDestroy(): void {
       this.renderer.addClass(body, 'bg-white');
     }
   }
+  
 
   getChemistryStages(furnace: any) {
     if (!furnace?.stages) return [];
@@ -309,6 +332,10 @@ initializeData() {
 
     this.updateBackground();
     this.cdRef.detectChanges();
+    error: () => {
+        // API error aanaalum network check pannanum
+        this.updateBackground();
+      }
   });
 
   this.socketService.connect(this.ip);
