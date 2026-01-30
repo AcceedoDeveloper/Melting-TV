@@ -1,5 +1,4 @@
 <div *ngIf="!isOnline" class="offline-banner">
-  <img src="assets/no-wifi.png" alt="off" style="width: 30px; height: 30px;">
   ⚠️ NETWORK DISCONNECTED - CHECK LAN/WIFI
 </div>
 
@@ -33,11 +32,6 @@
     <button class="set-ip-btn" (click)="setIP()">Set IP</button>
   </div>
 </div>
-
-
-
-
-
 
 <div class="IP-pop" *ngIf="isIPSet" >
 

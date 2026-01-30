@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy,ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit,OnDestroy,ChangeDetectorRef,} from '@angular/core';
 import { ResultServices } from '../services/result-services';
 import { CommonModule } from '@angular/common';
 // import { ChangeDetectorRef } from '@angular/core';
@@ -44,15 +44,50 @@ export class Result implements OnInit,OnDestroy{
     private config: AppConfigService,
   ) {}
 
-async ngOnInit() {
-    const status = await Network.getStatus();
-    console.log('status ', status);
+  
+// async ngOnInit() {
+//     const status = await Network.getStatus();
+//     console.log('status ', status);
     
-    this.isOnline = status.connected;
-    console.log('connection boolean ', this.isOnline);
+//     this.isOnline = status.connected;
+//     console.log('connection boolean ', this.isOnline);
     
 
+//     Network.addListener('networkStatusChange', status => {
+//       this.isOnline = status.connected;
+//       this.updateBackground();
+//       this.cdRef.detectChanges();
+//     });
+
+//     const savedIp = this.config.getIp();
+//     if (savedIp) {
+//       this.ip = savedIp;
+//       this.isIPSet = true;
+//       this.initializeData();
+//     }
+//   }
+
+async ngOnInit() {
+    const status = await Network.getStatus();
+    this.isOnline = status.connected;
+    
+    // Listen for network changes
     Network.addListener('networkStatusChange', status => {
+      console.log('Network status changed:', status);
+      
+      // If we were offline and now we are online, refresh data
+      if (status.connected && !this.isOnline) {
+        console.log('Network restored! Refreshing data...');
+        
+        // 1. Refresh logic: if IP is already set, re-run initialization
+        if (this.isIPSet) {
+          this.initializeData(); 
+        } else {
+          // Alternative: Full page reload if you want a clean state
+          // window.location.reload(); 
+        }
+      }
+
       this.isOnline = status.connected;
       this.updateBackground();
       this.cdRef.detectChanges();
@@ -65,7 +100,6 @@ async ngOnInit() {
       this.initializeData();
     }
   }
-  
 
 // @HostListener('window:online')
 //   updateOnlineStatus() {
@@ -320,7 +354,6 @@ setIP() {
 initializeData() {
 
   this.preventSleep();
-
   this.resultServices.getResults().subscribe((data: any[]) => {
     this.rawData = data;
     console.log('data', this.rawData);
@@ -342,6 +375,8 @@ initializeData() {
   });
 
   this.socketService.connect(this.ip);
+
+  
 
   this.socketService.on<any[]>('MELTING_TV').subscribe((data) => {
     this.rawData = data;
