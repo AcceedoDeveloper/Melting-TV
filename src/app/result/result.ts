@@ -22,10 +22,13 @@ export class Result implements OnInit,OnDestroy{
   selectedResult: any = null;
   status: boolean = false;
   count: number = 0;
+  logoUrl: string = '';
 
   today = new Date();
   ip : string = '';
   isIPSet: boolean = false;
+  imageName : string = '';
+  company : any;
 
   isOnline: boolean = true;
 
@@ -45,46 +48,22 @@ export class Result implements OnInit,OnDestroy{
   ) {}
 
   
-// async ngOnInit() {
-//     const status = await Network.getStatus();
-//     console.log('status ', status);
-    
-//     this.isOnline = status.connected;
-//     console.log('connection boolean ', this.isOnline);
-    
 
-//     Network.addListener('networkStatusChange', status => {
-//       this.isOnline = status.connected;
-//       this.updateBackground();
-//       this.cdRef.detectChanges();
-//     });
-
-//     const savedIp = this.config.getIp();
-//     if (savedIp) {
-//       this.ip = savedIp;
-//       this.isIPSet = true;
-//       this.initializeData();
-//     }
-//   }
 
 async ngOnInit() {
     const status = await Network.getStatus();
     this.isOnline = status.connected;
     
-    // Listen for network changes
     Network.addListener('networkStatusChange', status => {
       console.log('Network status changed:', status);
       
-      // If we were offline and now we are online, refresh data
       if (status.connected && !this.isOnline) {
         console.log('Network restored! Refreshing data...');
         
-        // 1. Refresh logic: if IP is already set, re-run initialization
         if (this.isIPSet) {
           this.initializeData(); 
         } else {
-          // Alternative: Full page reload if you want a clean state
-          // window.location.reload(); 
+          
         }
       }
 
@@ -99,30 +78,13 @@ async ngOnInit() {
       this.isIPSet = true;
       this.initializeData();
     }
+
+    
+      this.loadCompanyDetails();
+    
   }
 
-// @HostListener('window:online')
-//   updateOnlineStatus() {
-//     this.isOnline = true;
-//     console.log('Network connected');
-//   }
 
-//   @HostListener('window:offline')
-//   updateOfflineStatus() {
-//     this.isOnline = false;
-//     console.log('Network disconnected');
-//   }
-
-// ngOnInit(): void {
-//   const savedIp = this.config.getIp();
-
-//   if (savedIp) {
-//     this.ip = savedIp;
-//     this.isIPSet = true;
-
-//     this.initializeData(); 
-//   }
-// }
 
 ngOnDestroy(): void {
     this.allowSleep();
@@ -402,6 +364,30 @@ resetIP() {
   this.isIPSet = false;
   this.socketService.disconnect();
 }
+
+loadCompanyDetails(): void {
+  this.resultServices.getCompanyDetails().subscribe({
+    next: (data) => {
+      console.log('Company Details:', data);
+
+      const logoName = data?.companyLogo;
+      if (!logoName) {
+        this.logoUrl = '';
+        return;
+      }
+
+      this.logoUrl = `${this.ip}/uploads/${logoName}`;
+      console.log('Logo URL:', this.logoUrl);
+
+      this.cdRef.markForCheck();
+    },
+    error: (err) => {
+      console.error('Failed to load company details', err);
+    }
+  });
+}
+
+
 
 
 }

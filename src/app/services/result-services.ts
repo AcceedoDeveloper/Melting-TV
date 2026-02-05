@@ -37,5 +37,14 @@ export class ResultServices {
     const api = `${baseUrl}/planning/spectrum/from-furnace`;
     return this.http.get<ResultResponse[]>(api);
   }
+
+  getCompanyDetails() : Observable<any> {
+    const baseUrl = this.config.getApiBaseUrl();
+    const api = `${baseUrl}/company`;
+    return this.http.get<any>(api);
+  }
+
+
+
 }
 
