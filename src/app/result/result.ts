@@ -368,15 +368,17 @@ resetIP() {
 loadCompanyDetails(): void {
   this.resultServices.getCompanyDetails().subscribe({
     next: (data) => {
-      console.log('Company Details:', data);
-
       const logoName = data?.companyLogo;
       if (!logoName) {
         this.logoUrl = '';
         return;
       }
 
-      this.logoUrl = `${this.ip}/uploads/${logoName}`;
+      if (!this.ip.startsWith('http')) {
+        this.ip = `http://${this.ip}`;
+      }
+
+      this.logoUrl = `${this.ip}/uploads/${encodeURIComponent(logoName)}`;
       console.log('Logo URL:', this.logoUrl);
 
       this.cdRef.markForCheck();
