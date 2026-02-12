@@ -1,0 +1,254 @@
+<div class="dashboard-container">
+      <!-- 1. PLANNING SECTION -->
+      <section class="panel planning-section"[class.maximized]="maximizedPanel === 'planning'">
+        <div class="panel-header">
+  <div class="header-title">
+    <i class="fas fa-th-large mr-2"></i> 
+    <span>PLANNING</span>
+  </div>
+  <img src="assets\minimize.png" class="maximize-icon" alt="maximize"(click)="toggleMaximize('planning')">
+</div>
+        <div class="planning-body">
+          <!-- Entry 1 -->
+          <div class="planning-group">
+            <div class="planning-bar">
+              <div><span class="circle-num">1</span> <i class="far fa-calendar-alt ml-2"></i> Schedule Date: 2.2.2026</div>
+              <div>STATUS: <span class="status-badge">RUNNING</span></div>
+            </div>
+            <table class="table-mini">
+              <thead>
+                <tr>
+                  <th>GRADE</th>
+                  <th>CUSTOMER</th>
+                  <th>CHARGING WEIGHT</th>
+                  <th>PRODUCT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="font-extrabold">GRADE A</td><td>Indocell</td><td>100KG</td><td>Aluminium and Copper and Zinc</td></tr>
+                <tr><td class="font-extrabold">GRADE B</td><td>Sandfits</td><td>85KG</td><td>Copper and Zinc</td></tr>
+                <tr><td class="font-extrabold">GRADE C</td><td>Unique Shell</td><td>79KG</td><td>Aluminium and Copper</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="planning-group">
+            <div class="planning-bar">
+              <div><span class="circle-num">2</span> <i class="far fa-calendar-alt ml-2"></i> Schedule Date: 2.2.2026</div>
+              <div>STATUS: <span class="status-badge">RUNNING</span></div>
+            </div>
+            <table class="table-mini">
+              <thead>
+                <tr>
+                  <th>GRADE</th>
+                  <th>CUSTOMER</th>
+                  <th>CHARGING WEIGHT</th>
+                  <th>PRODUCT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="font-extrabold">GRADE A</td><td>Indocell</td><td>100KG</td><td>Aluminium and Copper and Zinc</td></tr>
+                <tr><td class="font-extrabold">GRADE B</td><td>Sandfits</td><td>85KG</td><td>Copper and Zinc</td></tr>
+                <tr><td class="font-extrabold">GRADE C</td><td>Unique Shell</td><td>79KG</td><td>Aluminium and Copper</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Entry 2 -->
+           <div class="planning-group">
+            <div class="planning-bar">
+              <div><span class="circle-num">3</span> <i class="far fa-calendar-alt ml-2"></i> Schedule Date: 2.2.2026</div>
+              <div>STATUS: <span class="status-badge">RUNNING</span></div>
+            </div>
+            <table class="table-mini">
+              <thead>
+                <tr>
+                  <th>GRADE</th>
+                  <th>CUSTOMER</th>
+                  <th>CHARGING WEIGHT</th>
+                  <th>PRODUCT</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td class="font-extrabold">GRADE A</td><td>Indocell</td><td>100KG</td><td>Aluminium and Copper and Zinc</td></tr>
+                <tr><td class="font-extrabold">GRADE B</td><td>Sandfits</td><td>85KG</td><td>Copper and Zinc</td></tr>
+                <tr><td class="font-extrabold">GRADE C</td><td>Unique Shell</td><td>79KG</td><td>Aluminium and Copper</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. FURNACE SECTION -->
+      <section class="panel furnace-section"[class.maximized]="maximizedPanel === 'furnace'">
+        <div class="panel-header"style="padding: 5px 10px;">
+          <span>FURNACE SECTION</span>
+          <i class="fas fa-expand-alt cursor-pointer"></i>
+           <img src="assets\minimize.png" class="maximize-icon" alt="maximize"(click)="toggleMaximize('furnace')">
+        </div>
+        <div class="furnace-flex">
+          <div class="furnace-sidebar">
+            <div class="btn-tab active">Furnace A</div>
+            <div class="furnace-details-text">
+              <div class="detail-row"><span class="font-bold">Customer</span><span>: SandFits</span></div>
+              <div class="detail-row"><span class="font-bold">Product Name</span><span>: Pipes and Tubes</span></div>
+              <div class="detail-row"><span class="font-bold">Drawing No</span><span>: 8654321</span></div>
+              <div class="detail-row"><span class="font-bold">Charging Wt</span><span>: 89 KG</span></div>
+            </div>
+            <div class="btn-tab mt-4 inactive-tab">Furnace B</div>
+            <div class="furnace-details-text">
+        <div class="detail-row"><span class="font-bold">Customer</span><span>: SandFits</span></div>
+        <div class="detail-row"><span class="font-bold">Product Name</span><span>: Pipes and Tubes</span></div>
+        <div class="detail-row"><span class="font-bold">Drawing No</span><span>: 8654321</span></div>
+        <div class="detail-row"><span class="font-bold">Charging Wt</span><span>: 89 KG</span></div>
+      </div>
+          </div>
+
+          <div class="furnace-main">
+            <div class="monitor-card">
+              <div class="monitor-header">
+                <div class="heat-no">Heat No : <span class="text-muted">150190</span></div>
+                <button class="btn-primary">Furnace Details</button>
+                <div class="duration">Duration : <span class="font-bold">3 Hrs</span></div>
+              </div>
+
+              <div class="timeline">
+                <div class="t-dot"><span class="t-time">09:59</span><span class="t-label">Started At<br>00:21</span></div>
+                <div class="t-dot"><span class="t-time">10:06</span><span class="t-label">Charge Mix<br>00:21</span></div>
+                <div class="t-dot"><span class="t-time">10:09</span><span class="t-label">Spectrum<br>1-I</span></div>
+                <div class="t-dot"><span class="t-time">10:17</span><span class="t-label">1-F</span></div>
+                <div class="t-dot green"><span class="t-time">10:30</span><span class="t-label success-text">Completed At</span></div>
+              </div>
+
+              <div class="monitor-footer">
+                <span>Power: <b>150 kWh</b></span>
+                <span>Temp: <b>100.8°C</b></span>
+              </div>
+            </div>
+            <!-- <div class="empty-placeholder">
+              <button class="btn-primary mb-2">Furnace Details ?</button>
+              <p class="placeholder-text">No Planning Yet to Select ?</p>
+            </div> -->
+          <!-- </div>
+        </div>
+      </section> -->
+
+      <hr class="my-4" style="border: 1px dashed #ccc;"> <div class="monitor-card">
+        <div class="monitor-header">
+          <div class="heat-no">Heat No : <span class="text-muted">150191</span></div>
+          <button class="btn-primary">Furnace Details</button>
+          <div class="duration">Duration : <span class="font-bold">2.5 Hrs</span></div>
+        </div>
+        <div class="timeline">
+          <div class="t-dot"><span class="t-time">11:00</span><span class="t-label">Started At</span></div>
+          <div class="t-dot"><span class="t-time">11:15</span><span class="t-label">Charge Mix</span></div>
+          <div class="t-dot"><span class="t-time">11:45</span><span class="t-label">Spectrum</span></div>
+          <div class="t-dot green"><span class="t-time">12:30</span><span class="t-label success-text">Completed At</span></div>
+        </div>
+        <div class="monitor-footer">
+          <span>Power: <b>120 kWh</b></span>
+          <span>Temp: <b>98.5°C</b></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+      <!-- 3. CHARGE MIX -->
+      <section class="panel charge-section"[class.maximized]="maximizedPanel === 'charge'">
+        <div class="panel-header">
+          <span>CHARGE MIX</span>
+          <i class="fas fa-expand-alt cursor-pointer"></i>
+           <img src="assets\minimize.png" class="maximize-icon" alt="maximize"(click)="toggleMaximize('charge')">
+        </div>
+        <div class="meta-strip">
+          <div class="meta-brand">
+            <i class="fas fa-th-large brand-icon"></i>
+            <div>
+              <div class="brand-name">Furnace A</div>
+              <div class="brand-sub">HEAT NO: 112311</div>
+            </div>
+          </div>
+          <div><div class="label">Customer:</div><div class="val">Indocell and sanfits</div></div>
+          <div><div class="label">Part Name:</div><div class="val">Engine and Silencer</div></div>
+          <div><div class="label">Charging Wt:</div><div class="val">560</div></div>
+          <div><div class="label">Schedule Date:</div><div class="val">2.2.2026</div></div>
+        </div>
+        <table class="charge-table">
+          <thead>
+            <tr>
+              <th class="text-left"><i class="fas fa-cubes mr-2"></i> Raw Materials</th>
+              <th class="text-center"><i class="fas fa-weight-hanging mr-1"></i> Weight</th>
+              <th class="text-center"><i class="fas fa-percentage mr-1"></i> Pick up %</th>
+              <th class="sub-header-cell">
+                <div>Addition</div>
+                <div class="addition-cols">
+                  <span>Required</span><span>Taken</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Aluminium</td><td align="center">100KG</td><td align="center">12%</td><td class="bg-light"><div class="val-split"><span>10Kg</span><span>5Kg</span></div></td></tr>
+            <tr><td>Copper</td><td align="center">95KG</td><td align="center">10%</td><td class="bg-light"><div class="val-split"><span>15Kg</span><span>10Kg</span></div></td></tr>
+            <tr><td>Boran</td><td align="center">100KG</td><td align="center">13%</td><td class="bg-light"><div class="val-split"><span>20Kg</span><span>15Kg</span></div></td></tr>
+            <tr><td>Zinc</td><td align="center">67KG</td><td align="center">15%</td><td class="bg-light"><div class="val-split"><span>15Kg</span><span>9Kg</span></div></td></tr>
+            <tr><td>Carbon</td><td align="center">88KG</td><td align="center">11%</td><td class="bg-light"><div class="val-split"><span>14Kg</span><span>8Kg</span></div></td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 4. SPECTRO LAB -->
+      <section class="panel spectro-section"[class.maximized]="maximizedPanel === 'spectro'">
+        <div class="panel-header">
+          <div class="flex-row items-center gap-4">
+            <span>FURNACE A</span>
+            <span class="sub-heat">Heat No : 150140</span>
+            
+          </div>
+          <div class="flex-row items-center gap-2">
+            <span class="received-time">Result received at : Nov 11, 2025 04:15 PM</span>
+            <i class="fas fa-expand-alt cursor-pointer"></i>
+             <img src="assets\minimize.png" class="maximize-icon" alt="maximize"(click)="toggleMaximize('spectro')">
+          </div>
+        </div>
+        
+        <div class="lab-info-grid">
+          <div><div class="label">Customer</div><div class="val">AcceedoAcceedoAcceedo</div></div>
+          <div><div class="label">Part Name</div><div class="val">Filter head</div></div>
+          <div><div class="label">Stage</div><div class="val">Initial 1</div></div>
+          <div><div class="label">Checked By</div><div class="val">Muthukumar</div></div>
+          <div><div class="label">Grade</div><div class="val">VS2-1-3-8</div></div>
+          <div><div class="label">Method</div><div class="val">VS2-1-3-8</div></div>
+        </div>
+
+        <div class="lab-result-header">
+          <span>Spectro Lab Results</span>
+          <span class="ok-badge">Tested Ok <i class="fas fa-check-circle ml-1"></i></span>
+        </div>
+
+        <table class="spectro-table">
+          <thead>
+            <tr><th align="left">Elements</th><th>Mo</th><th>P</th><th>Sn</th><th>Cr</th><th>Si</th><th>Mn</th><th>S</th></tr>
+          </thead>
+          <tbody>
+            <tr><td align="left" class="label-cell">Result %</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td></tr>
+            <tr class="row-red"><td align="left" class="label-cell">Required</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td></tr>
+            <tr><td align="left" class="label-cell">Actual Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td></tr>
+            <tr class="border-top"><td align="left" class="label-cell">Elements</td><td>Ni</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+          </tbody>
+        </table>
+
+        <table class="spectro-table">
+          <thead>
+            <tr><th align="left">Elements</th><th>Mo</th><th>P</th><th>Sn</th><th>Cr</th><th>Si</th><th>Mn</th><th>S</th></tr>
+          </thead>
+          <tbody>
+            <tr><td align="left" class="label-cell">Result %</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td><td>5%</td></tr>
+            <tr class="row-red"><td align="left" class="label-cell">Required</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td><td>456 Kg</td></tr>
+            <tr><td align="left" class="label-cell">Actual Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td><td>56 Kg</td></tr>
+            <tr class="border-top"><td align="left" class="label-cell">Elements</td><td>Ni</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
